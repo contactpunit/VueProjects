@@ -23,6 +23,9 @@ const app = Vue.createApp({
     },
     submitForm() {
       // pass
+    },
+    clearInput() {
+      this.name = ''
     }
   }
 })
