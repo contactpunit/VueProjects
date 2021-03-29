@@ -16,6 +16,9 @@ const app = Vue.createApp({
     },
     readName(event) {
       this.name = event.target.value
+    },
+    submitForm() {
+      // pass
     }
   }
 })
