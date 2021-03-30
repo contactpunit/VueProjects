@@ -4,14 +4,21 @@ const app = Vue.createApp({
             tasks: [],
             task: '',
             visible: true,
+            buttonText: 'Hide/Show List'
         }
     },
     computed: {
-        // toggleDisplay() {
-        //     return {
-        //         hidden: this.visible ? '' : 'none'
-        //     }
-        // }
+        toggleCaption() {
+            if (this.tasks.length === 0) {
+                return this.buttonText
+            }
+            else if (this.visible) {
+                return 'Hide List'
+            }
+            else {
+                return 'Show List'
+            }
+        }
     },
     methods: {
         addTask(value) {
