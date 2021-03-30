@@ -19,7 +19,7 @@ const app = Vue.createApp({
         }
     },
     watch: {
-        result() {
+        message() {
             setTimeout(() => {
                 this.result = 0
             }, 5000)
