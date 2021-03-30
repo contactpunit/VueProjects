@@ -7,11 +7,11 @@ const app = Vue.createApp({
         }
     },
     computed: {
-        toggleDisplay() {
-            return {
-                hidden: this.visible ? '' : 'none'
-            }
-        },
+        // toggleDisplay() {
+        //     return {
+        //         hidden: this.visible ? '' : 'none'
+        //     }
+        // }
     },
     methods: {
         addTask(value) {
