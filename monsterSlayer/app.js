@@ -37,6 +37,16 @@ const app = Vue.createApp({
             }
             this.playerHealth = this.playerHealth + healValue
             this.strikeBack()
+        },
+        startAgain() {
+            this.playerHealth = 100
+            this.monsterHealth = 100
+            this.currentRound = 0
+            this.winner = null
+        },
+        surrender() {
+            this.currentRound++
+            this.playerHealth = 0
         }
     },
     watch: {
@@ -59,10 +69,10 @@ const app = Vue.createApp({
     },
     computed: {
         monsterStyles() {
-            return { width: this.monsterHealth + '%' }
+            return { width: (this.monsterHealth > 0 ? this.monsterHealth : 0) + '%' }
         },
         playerStyles() {
-            return { width: this.playerHealth + '%' }
+            return { width: (this.playerHealth > 0 ? this.playerHealth : 0) + '%' }
         },
         roundAvailable() {
             return this.currentRound % 3 !== 0
