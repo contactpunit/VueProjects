@@ -2,32 +2,26 @@
     <section>
         <header><h1>My Friends</h1></header>
         <ul>
-            <friend-contact></friend-contact>
+            <friend-contact
+            name="Punit Jain"
+            phone-number="112232534676"
+            email-address="punit@example.com">
+            </friend-contact>
+            <friend-contact
+            name="Rahul Jain"
+            phone-number="5453454366"
+            email-address="rahul@example.com">
+            </friend-contact>
         </ul>
     </section>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            friends: [
-                {
-                    id: 'punit',
-                    name: 'Punit Jain',
-                    age: 40,
-                    phone: '112232534676',
-                    email: 'punit@example.com'
-                },
-                {
-                    id: 'rahul',
-                    name: 'Rahul Jain',
-                    age: 30,
-                    phone: '5453454366',
-                    email: 'rahul@example.com'
-                }]
-        }
-    }
+    // data() {
+    //     return {
+    //     }
+    // }
 }
 </script>
 
