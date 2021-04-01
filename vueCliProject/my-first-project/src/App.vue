@@ -14,6 +14,7 @@
             :email-address="friend.email"
             :is-favroite="friend.favorite"
             @toggling-fav="listenToggleEvent"
+            @delete-contact="deleteFriend"
             >
             </friend-contact>
         </ul>
@@ -24,21 +25,7 @@
 export default {
     data() {
         return {
-            friends: [
-                // {
-                //     id: "Punit",
-                //     name: "Punit Jain",
-                //     phone: '5453454366',
-                //     email: "punit@example.com"
-                // },
-                // {
-                //     id: "Rahul",
-                //     name:"Rahul Jain",
-                //     phone:"2234342223",
-                //     email:"rahul@example.com",
-                //     favorite: true
-                // }
-            ]
+            friends: []
         }
     },
     methods: {
@@ -55,7 +42,11 @@ export default {
                     favorite: false
                 }
                 this.friends.push(newFriend)
-
+            },
+            deleteFriend(value) {
+                const requiredFriend = this.friends.find(friend => friend.id === value)
+                console.log(requiredFriend)
+                this.friends.splice(requiredFriend, 1)
             }
         }
 }
