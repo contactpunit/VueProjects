@@ -6,13 +6,12 @@
             name="Punit Jain"
             phone-number="112232534676"
             email-address="punit@example.com"
-            is-favroite="1">
+            :is-favroite=true>
             </friend-contact>
             <friend-contact
             name="Rahul Jain"
             phone-number="5453454366"
-            email-address="rahul@example.com"
-            is-favroite="0">
+            email-address="rahul@example.com">
             </friend-contact>
         </ul>
     </section>

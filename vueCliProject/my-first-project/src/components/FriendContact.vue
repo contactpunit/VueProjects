@@ -1,6 +1,6 @@
 <template>
     <li>
-        <h2>{{ name }}{{toggleFavorite === '1' ? '(Favroite)' : ''}}</h2>
+        <h2>{{ name }}{{toggleFavorite ? '(Favroite)' : ''}}</h2>
         <button @click="toggleDetails">{{this.visible ? 'Hide' : 'Show'}} Details</button>
         <button @click="toggleFav">Toggle Favroite</button>
         <ul v-if="this.visible">
@@ -12,21 +12,29 @@
 
 <script>
 export default {
-    props: [
-        'name',
-        'phoneNumber',
-        'emailAddress',
-        'isFavroite'
-    ],
+    // props: [ 'name','phoneNumber','emailAddress','isFavroite'],
+    props: {
+        name: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
+        emailAddress: {
+            type: String,
+            required: true
+        },
+        isFavroite: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
     data() {    
         return {
             visible: false,
-            // friend: {
-            //         id: 'punit',
-            //         name: 'Punit Jain',
-            //         phone: '112232534676',
-            //         email: 'punit@example.com'
-            //     }
         toggleFavorite: this.isFavroite
         }
     },
@@ -35,12 +43,13 @@ export default {
             this.visible = !this.visible
         },
         toggleFav() {
-            if (this.toggleFavorite === '1') {
-                this.toggleFavorite = '0'
-            }
-            else {
-                this.toggleFavorite = '1'
-            }
+            // if (this.toggleFavorite === '1') {
+            //     this.toggleFavorite = '0'
+            // }
+            // else {
+            //     this.toggleFavorite = '1'
+            // }
+            this.toggleFavorite = !this.toggleFavorite
         }
     }
 }
