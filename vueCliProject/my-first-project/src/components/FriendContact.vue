@@ -12,7 +12,6 @@
 
 <script>
 export default {
-    // props: [ 'name','phoneNumber','emailAddress','isFavroite'],
     props: {
         name: {
             type: String,
@@ -43,12 +42,6 @@ export default {
             this.visible = !this.visible
         },
         toggleFav() {
-            // if (this.toggleFavorite === '1') {
-            //     this.toggleFavorite = '0'
-            // }
-            // else {
-            //     this.toggleFavorite = '1'
-            // }
             this.toggleFavorite = !this.toggleFavorite
         }
     }

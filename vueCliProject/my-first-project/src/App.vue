@@ -3,15 +3,12 @@
         <header><h1>My Friends</h1></header>
         <ul>
             <friend-contact
-            name="Punit Jain"
-            phone-number="112232534676"
-            email-address="punit@example.com"
-            :is-favroite=true>
-            </friend-contact>
-            <friend-contact
-            name="Rahul Jain"
-            phone-number="5453454366"
-            email-address="rahul@example.com">
+            v-for="friend in friends"
+            :key="friend.id"
+            :name="friend.name"
+            :phone-number="friend.phone"
+            :email-address="friend.email"
+            :is-favroite="friend.favorite">
             </friend-contact>
         </ul>
     </section>
@@ -19,10 +16,25 @@
 
 <script>
 export default {
-    // data() {
-    //     return {
-    //     }
-    // }
+    data() {
+        return {
+            friends: [
+                {
+                    id: "Punit",
+                    name: "Punit Jain",
+                    phone: '5453454366',
+                    email: "punit@example.com"
+                },
+                {
+                    id: "Rahul",
+                    name:"Rahul Jain",
+                    phone:"2234342223",
+                    email:"rahul@example.com",
+                    favorite: true
+                }
+            ]
+        }
+    }
 }
 </script>
 
