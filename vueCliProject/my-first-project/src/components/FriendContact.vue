@@ -35,6 +35,7 @@ export default {
             default: false
         }
     },
+    emits: ['toggling-fav'],
     data() {    
         return {
             visible: false,
