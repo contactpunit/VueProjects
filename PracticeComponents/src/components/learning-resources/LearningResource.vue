@@ -3,7 +3,7 @@
         <base-card>
             <header>
                 <h3>{{ title }}</h3>
-                <button>Delete</button>
+                <base-button mode="flat">Delete</base-button>
             </header>
         <p>{{ description }}</p>
         <nav>
@@ -26,6 +26,14 @@ export default {
             required: true
         },
         link: {
+            type: String,
+            required: true
+        },
+        caption: {
+            type: String,
+            required: true
+        },
+        id: {
             type: String,
             required: true
         }
