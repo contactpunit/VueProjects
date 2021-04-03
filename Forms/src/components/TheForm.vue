@@ -51,14 +51,20 @@
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm">
       <label for="confirm-terms">Agree to Terms</label>
     </div>
-    <div>
+    <div class="form-control">
       <button>Save Data</button>
     </div>
+      <rating-control v-model="rating"></rating-control>
   </form>
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue'
+
 export default {
+  components: {
+    RatingControl
+  },
   data() {
     return {
       username: '',
@@ -67,16 +73,13 @@ export default {
       interest: [],
       how: null,
       confirm: false,
-      isValid: true
+      isValid: true,
+      rating: this.modelValue
     }
   },
   methods: {
     submitData() {
-      console.log(this.username)
-      console.log(this.referrer)
-      console.log(this.interest)
-      console.log(this.how)
-      console.log(this.confirm)
+      console.log(this.rating)
     },
     validateUserName() {
       if (this.username === '') {
