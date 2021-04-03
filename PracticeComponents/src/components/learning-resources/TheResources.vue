@@ -57,13 +57,17 @@ export default {
             }
             this.storedResources.unshift(newResource)
             this.selectedTab = 'stored-resources'
-
+        },
+        removeResource(id) {
+            const resource = this.storedResources.find(res => res.id === id)
+            this.storedResources.splice(resource, 1)
         }
     },
     provide() {
         return {
             resources: this.storedResources,
-            addResource: this.addResource
+            addResource: this.addResource,
+            removeResource: this.removeResource
         }
     }
 }
