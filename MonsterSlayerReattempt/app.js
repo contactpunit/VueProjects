@@ -8,7 +8,8 @@ const app = Vue.createApp({
             playerHealth: 100,
             monsterHealth: 100,
             specialAttackCounter: 0,
-            winner: null
+            winner: null,
+            logs: []
         }
     },
     computed: {
@@ -38,20 +39,24 @@ const app = Vue.createApp({
         attackMonster() {
             this.specialAttackCounter++
             this.monsterHealth -= calculateValue(5, 12)
+            this.addLogMessage('player', 'attack')
             this.attackPlayer()
         },
         attackPlayer() {
             this.playerHealth -= calculateValue(8, 18)
+            this.addLogMessage('monster', 'attack')
         },
         specialAttack() {
             this.specialAttackCounter++
             this.monsterHealth -= calculateValue(10, 20)
+            this.addLogMessage('player', 'speciaAttack')
             this.attackPlayer()
         },
         healPlayer() {
             const healValue = calculateValue(20, 30)
             if (this.playerHealth + healValue > 100) this.playerHealth = 100
             else this.playerHealth += healValue
+            this.addLogMessage('player', 'heal')
             this.attackPlayer()
         },
         startOver() {
@@ -59,9 +64,16 @@ const app = Vue.createApp({
             this.monsterHealth = 100
             this.specialAttackCounter = 0
             this.winner = null
+            this.logs = []
         },
         surrender() {
             this.playerHealth = 0
+        },
+        addLogMessage(who, what) {
+            this.logs.push({
+                actionBy: who,
+                action: what
+            })
         }
     }
 })
