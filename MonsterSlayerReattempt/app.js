@@ -59,6 +59,9 @@ const app = Vue.createApp({
             this.monsterHealth = 100
             this.specialAttackCounter = 0
             this.winner = null
+        },
+        surrender() {
+            this.playerHealth = 0
         }
     }
 })
