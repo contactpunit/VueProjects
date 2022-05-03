@@ -14,6 +14,14 @@ const app = Vue.createApp({
     computed: {
         specialAttackAvailable() {
             return this.specialAttackCounter % 3 !== 0
+        },
+        monsterHealthBar() {
+            if (this.monsterHealth <= 0) this.monsterHealth = 0
+            return { width: this.monsterHealth + '%' }
+        },
+        playerHealthBar() {
+            if (this.playerHealth <= 0) this.playerHealth = 0
+            return { width: this.playerHealth + '%' }
         }
     },
     watch: {
@@ -45,6 +53,12 @@ const app = Vue.createApp({
             if (this.playerHealth + healValue > 100) this.playerHealth = 100
             else this.playerHealth += healValue
             this.attackPlayer()
+        },
+        startOver() {
+            this.playerHealth = 100
+            this.monsterHealth = 100
+            this.specialAttackCounter = 0
+            this.winner = null
         }
     }
 })
