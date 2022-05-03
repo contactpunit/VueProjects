@@ -2,18 +2,21 @@ const app = Vue.createApp({
     data() {
         return {
             tasks: [],
-            listDisplay: true,
-            buttonText: 'Hide List'
+            enteredValue: '',
+            listDisplay: true
         }
     },
     methods: {
-        addTask(task) {
-            this.tasks.push(task)
+        addTask() {
+            this.tasks.push(this.enteredValue)
         },
         manageListView() {
             this.listDisplay = !this.listDisplay
-            if (this.listDisplay) this.buttonText = 'Hide List'
-            else this.buttonText = 'Show List'
+        }
+    },
+    computed: {
+        buttonCaption() {
+            return this.listDisplay ? 'Hide List' : 'Show List'
         }
     }
 })
