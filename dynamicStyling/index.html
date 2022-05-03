@@ -20,7 +20,7 @@
     <!-- The entered class should be added to the below paragraph -->
     <input type="text" v-model="userInput" />
     <!-- (available classes: "user1", "user2") -->
-    <p :class="[userInput, {active: activeValue, hidden: hiddenValue}]">
+    <p :class="renderClass">
       Style me!
     </p>
     <button @click="togglePara">Toggle Paragraph</button>

@@ -3,20 +3,19 @@ const app = Vue.createApp({
         return {
             userInput: '',
             activeValue: true,
-            hiddenValue: false,
             bgColor: '#8ddba4'
 
         }
     },
     computed: {
         renderClass() {
-            return this.userInput
+            // return this.userInput
+            return { [this.userInput]: this.userInput, active: this.activeValue, hidden: !this.activeValue }
         }
     },
     methods: {
         togglePara() {
             this.activeValue = !this.activeValue
-            this.hiddenValue = !this.hiddenValue
         },
         readColor(event) {
             this.bgColor = event.target.value
