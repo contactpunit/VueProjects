@@ -21,7 +21,6 @@
 
 <script>
 export default {
-  // props: ["name", "emailAddress", "phoneNumber", "isFavorite"],
   props: {
     id: {
       type: String,
@@ -45,6 +44,7 @@ export default {
       default: false,
     },
   },
+  emits: ["toggle-favorite"],
   data() {
     return {
       detailsAreVisible: false,
