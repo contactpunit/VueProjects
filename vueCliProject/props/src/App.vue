@@ -14,7 +14,6 @@
         name="Manu Jain"
         email-address="manu@localhost.com"
         phone-number="87877787"
-        isFavorite="0"
       ></friend-contact>
     </ul>
   </section>
