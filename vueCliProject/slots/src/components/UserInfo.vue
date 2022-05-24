@@ -15,6 +15,3 @@ export default {
   props: ["fullName", "infoText", "role"],
 };
 </script>
-
-<style scoped>
-</style>
