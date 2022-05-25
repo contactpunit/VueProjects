@@ -7,10 +7,8 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     ></user-info>
-    <course-goals>
-      <template #default="item">
-        <h2>{{ item.item }}</h2>
-      </template>
+    <course-goals #default="item">
+      <h2>{{ item.item }}</h2>
     </course-goals>
   </div>
 </template>
