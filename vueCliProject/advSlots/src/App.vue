@@ -1,39 +1,40 @@
 <template>
   <div>
     <the-header></the-header>
-    <badge-list></badge-list>
-    <user-info
-      :full-name="activeUser.name"
-      :info-text="activeUser.description"
-      :role="activeUser.role"
-    ></user-info>
-    <course-goals #default="item">
-      <h2>{{ item.item }}</h2>
-    </course-goals>
+    <button @click="activate('active-goals')">Active Goals</button>
+    <button @click="activate('manage-goals')">Manage Goals</button>
+    <!-- <active-goals v-if="selectedtab === 'active-goal'"></active-goals>
+    <manage-goals v-if="selectedtab === 'manage-goal'"></manage-goals> -->
+    <component :is="selectedtab"></component>
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
-import BadgeList from "./components/BadgeList.vue";
-import UserInfo from "./components/UserInfo.vue";
-import CourseGoals from "./components/CourseGoals.vue";
+import ActiveGoals from "./components/ActiveGoals.vue";
+import ManageGoals from "./components/ManageGoals.vue";
 
 export default {
   components: {
     "the-header": TheHeader,
-    "badge-list": BadgeList,
-    "user-info": UserInfo,
-    "course-goals": CourseGoals,
+    "active-goals": ActiveGoals,
+    "manage-goals": ManageGoals,
   },
   data() {
     return {
+      selectedtab: "active-goals",
       activeUser: {
         name: "Maximilian Schwarzmüller",
         description: "Site owner and admin",
         role: "admin",
       },
     };
+  },
+  methods: {
+    activate(value) {
+      console.log(value);
+      this.selectedtab = value;
+    },
   },
 };
 </script>
