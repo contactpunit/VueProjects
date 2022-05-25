@@ -5,7 +5,9 @@
     <button @click="activate('manage-goals')">Manage Goals</button>
     <!-- <active-goals v-if="selectedtab === 'active-goal'"></active-goals>
     <manage-goals v-if="selectedtab === 'manage-goal'"></manage-goals> -->
-    <component :is="selectedtab"></component>
+    <keep-alive>
+      <component :is="selectedtab"></component>
+    </keep-alive>
   </div>
 </template>
 
