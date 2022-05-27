@@ -36,6 +36,7 @@ export default {
     return {
       storedResources: this.storedResources,
       addResources: this.addResources,
+      removeResource: this.removeResource,
     };
   },
   inject: ['userData'],
@@ -71,6 +72,11 @@ export default {
       };
       this.storedResources.push(tempResource);
       this.selectedTab = 'stored-resources';
+    },
+    removeResource(id) {
+      const idx = this.storedResources.findIndex((res) => res.id === id);
+      if (idx !== null && idx !== 'undefined')
+        this.storedResources.splice(idx, 1);
     },
   },
 };
