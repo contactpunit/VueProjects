@@ -1,4 +1,12 @@
 <template>
+  <base-dialog v-if="isInvalid" title="Invalid Input" @close="resetInvalid">
+    <template #default>
+      <p>Atleast one value is invalid</p>
+    </template>
+    <template #actions>
+      <base-button @click="resetInvalid">OK</base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <h2>Add Resource</h2>
     <form @submit.prevent="saveData">
@@ -29,17 +37,31 @@
 <script>
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
+import BaseDialog from '../UI/BaseDialog.vue';
 export default {
   components: {
     BaseCard,
     BaseButton,
+    BaseDialog,
+  },
+  data() {
+    return {
+      isInvalid: false,
+    };
   },
   inject: ['addResources'],
   methods: {
+    resetInvalid() {
+      this.isInvalid = false;
+    },
     saveData() {
       const title = this.$refs.title.value;
       const description = this.$refs.description.value;
       const link = this.$refs.link.value;
+      if (!title.trim() || !description.trim() || !link.trim()) {
+        this.isInvalid = true;
+        return;
+      }
       this.addResources(title, description, link);
     },
   },
