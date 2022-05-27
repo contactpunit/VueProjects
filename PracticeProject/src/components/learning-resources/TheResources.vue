@@ -39,7 +39,6 @@ export default {
       removeResource: this.removeResource,
     };
   },
-  inject: ['userData'],
   data() {
     return {
       selectedTab: 'stored-resources',
