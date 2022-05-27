@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <h2>Add Resource</h2>
-    <form>
+    <form @submit.prevent="saveData">
       <div class="form-control">
         <label for="title">Title</label>
         <input type="text" name="title" id="title" ref="title" />
@@ -20,9 +20,7 @@
         <input type="url" name="link" id="link" ref="link" />
       </div>
       <div>
-        <base-button type="submit" @click.prevent="saveData"
-          >Add Resource</base-button
-        >
+        <base-button>Add Resource</base-button>
       </div>
     </form>
   </base-card>
