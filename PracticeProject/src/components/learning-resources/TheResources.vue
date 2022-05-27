@@ -33,8 +33,10 @@ export default {
   provide() {
     return {
       storedResources: this.storedResources,
+      addResources: this.addResources,
     };
   },
+  inject: ['userData'],
   data() {
     return {
       selectedTab: 'stored-resources',
@@ -57,6 +59,16 @@ export default {
   methods: {
     setSelectedTab(tab) {
       this.selectedTab = tab;
+    },
+    addResources(title, desc, link) {
+      const tempResource = {
+        id: new Date().toISOString(),
+        title,
+        link,
+        description: desc,
+      };
+      this.storedResources.push(tempResource);
+      this.selectedTab = 'stored-resources';
     },
   },
 };
