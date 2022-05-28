@@ -8,6 +8,9 @@
         >
       </div>
       <p v-if="isLoading">Please wait for data to load ....</p>
+      <p v-else-if="!isLoading && records && records.length === 0">
+        No survey data found
+      </p>
       <ul v-else>
         <survey-result
           v-for="record in records"
