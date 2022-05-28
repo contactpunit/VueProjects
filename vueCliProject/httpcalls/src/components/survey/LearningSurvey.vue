@@ -39,8 +39,9 @@
           <label for="rating-great">Great</label>
         </div>
         <p v-if="invalidInput">
-          One or more input fields are invalid. Please check your provided data.
+          {{ errMessage }}
         </p>
+        <p v-if="apiError">{{ errMessage }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -56,21 +57,20 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      apiError: false,
+      erressage: '',
     };
   },
-  // emits: ['survey-submit'],
   methods: {
     submitSurvey() {
       if (this.enteredName === '' || !this.chosenRating) {
         this.invalidInput = true;
+        this.errMessage =
+          'One or more input fields are invalid. Please check your provided data';
         return;
       }
       this.invalidInput = false;
-
-      // this.$emit('survey-submit', {
-      //   userName: this.enteredName,
-      //   rating: this.chosenRating,
-      // });
+      this.apiError = false;
       fetch('https://vue-demo-deb48-default-rtdb.firebaseio.com/survey.json', {
         method: 'POST',
         headers: {
@@ -80,7 +80,18 @@ export default {
           name: this.enteredName,
           rating: this.chosenRating,
         }),
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            // ..
+          } else {
+            throw new Error('Unable to save the data.');
+          }
+        })
+        .catch((err) => {
+          this.apiError = true;
+          this.errMessage = err.message;
+        });
 
       this.enteredName = '';
       this.chosenRating = null;
