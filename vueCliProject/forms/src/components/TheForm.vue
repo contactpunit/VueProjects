@@ -89,6 +89,9 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+    <div class="form-control">
+      <rating-control v-model="rating"></rating-control>
+    </div>
     <div>
       <button>Save Data</button>
     </div>
@@ -96,7 +99,12 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue';
+
 export default {
+  components: {
+    RatingControl,
+  },
   data() {
     return {
       username: '',
@@ -105,10 +113,14 @@ export default {
       interest: [],
       learn: null,
       usernameValid: '',
+      rating: null,
     };
   },
   methods: {
-    submitForm() {},
+    submitForm() {
+      console.log(this.rating);
+      this.rating = null;
+    },
     validateName() {
       if (!this.username) this.usernameValid = 'failed';
       else this.usernameValid = 'pass';
