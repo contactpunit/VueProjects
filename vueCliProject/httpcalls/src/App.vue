@@ -1,6 +1,6 @@
 <template>
   <learning-survey></learning-survey>
-  <user-experiences :results="savedSurveyResults"></user-experiences>
+  <user-experiences></user-experiences>
 </template>
 
 <script>
@@ -12,11 +12,11 @@ export default {
     LearningSurvey,
     UserExperiences,
   },
-  data() {
-    return {
-      savedSurveyResults: [],
-    };
-  },
+  // data() {
+  //   return {
+  //     savedSurveyResults: [],
+  //   };
+  // },
   // methods: {
   //   storeSurvey(surveyData) {
   //     const surveyResult = {
