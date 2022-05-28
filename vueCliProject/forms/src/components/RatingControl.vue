@@ -4,7 +4,7 @@
       <button
         type="button"
         @click="activate('poor')"
-        :class="{ active: activeOption === 'poor' }"
+        :class="{ active: modelValue === 'poor' }"
       >
         Poor
       </button>
@@ -13,7 +13,7 @@
       <button
         type="button"
         @click="activate('avg')"
-        :class="{ active: activeOption === 'avg' }"
+        :class="{ active: modelValue === 'avg' }"
       >
         Average
       </button>
@@ -22,7 +22,7 @@
       <button
         type="button"
         @click="activate('good')"
-        :class="{ active: activeOption === 'good' }"
+        :class="{ active: modelValue === 'good' }"
       >
         Good
       </button>
@@ -38,14 +38,14 @@ export default {
   //     return {
   //       activeOption: this.modelValue,
   //     };
-  computed: {
-    activeOption() {
-      return this.modelValue;
-    },
-  },
+  //   computed: {
+  //     activeOption() {
+  //       return this.modelValue;
+  //     },
+  //   },
   methods: {
     activate(option) {
-      this.activeOption = option;
+      //   this.activeOption = option;
       this.$emit('update:modelValue', option);
     },
   },
