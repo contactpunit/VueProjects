@@ -8,6 +8,7 @@
         >
       </div>
       <p v-if="isLoading">Please wait for data to load ....</p>
+      <p v-else-if="apiError">Unable to fetch the data</p>
       <p v-else-if="!isLoading && records && records.length === 0">
         No survey data found
       </p>
@@ -34,6 +35,7 @@ export default {
     return {
       records: [],
       isLoading: false,
+      apiError: false,
     };
   },
   mounted() {
@@ -42,6 +44,7 @@ export default {
   methods: {
     getRecords() {
       this.isLoading = true;
+      this.apiError = false;
       fetch('https://vue-demo-deb48-default-rtdb.firebaseio.com/survey.json', {
         method: 'GET',
         headers: {
@@ -63,7 +66,10 @@ export default {
             });
           }
         })
-        .catch((err) => console.log(err.message));
+        .catch(() => {
+          this.isLoading = false;
+          this.apiError = true;
+        });
     },
   },
 };
