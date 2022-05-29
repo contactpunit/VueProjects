@@ -12,9 +12,15 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/teams' },
     // { path: '/teams', component: TeamsList, alias: '/' },
-    { path: '/teams', component: TeamsList },
+    {
+      path: '/teams',
+      component: TeamsList,
+      children: [
+        { path: '/teams/:teamId', component: TeamMembers, props: true },
+      ],
+    },
     { path: '/users', component: UsersList },
-    { path: '/teams/:teamId', component: TeamMembers, props: true },
+    // { path: '/teams/:teamId', component: TeamMembers, props: true },
     { path: '/:catchAll(.*)', component: ErrorPage },
   ],
   history: createWebHistory(),
