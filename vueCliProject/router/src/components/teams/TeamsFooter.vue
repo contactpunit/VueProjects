@@ -1,0 +1,1 @@
+<template>This is Teams footer</template>

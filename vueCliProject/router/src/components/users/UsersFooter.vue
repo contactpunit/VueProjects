@@ -1,0 +1,1 @@
+<template>This is Users footer</template>
