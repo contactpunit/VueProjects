@@ -12,7 +12,11 @@ export default {
   computed: {
     getTeamMembers() {
       // return '/teams/' + this.id;
-      return { name: 'teamids', params: { teamId: this.id } };
+      return {
+        name: 'teamids',
+        params: { teamId: this.id },
+        query: { sort: 'asc' },
+      };
     },
   },
 };

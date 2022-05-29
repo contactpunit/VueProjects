@@ -30,6 +30,7 @@ export default {
   inject: ['teams', 'users'],
   methods: {
     loadTeamMembers(teamId) {
+      console.log(this.$route.query);
       if (teamId) {
         const selectedTeam = this.teams.find((team) => team.id === teamId);
         this.teamName = selectedTeam.name;
