@@ -14,13 +14,18 @@ const router = createRouter({
     // { path: '/teams', component: TeamsList, alias: '/' },
     {
       path: '/teams',
+      name: 'teams',
       component: TeamsList,
       children: [
-        { path: '/teams/:teamId', component: TeamMembers, props: true },
+        {
+          path: '/teams/:teamId',
+          name: 'teamids',
+          component: TeamMembers,
+          props: true,
+        },
       ],
     },
-    { path: '/users', component: UsersList },
-    // { path: '/teams/:teamId', component: TeamMembers, props: true },
+    { path: '/users', name: 'users', component: UsersList },
     { path: '/:catchAll(.*)', component: ErrorPage },
   ],
   history: createWebHistory(),

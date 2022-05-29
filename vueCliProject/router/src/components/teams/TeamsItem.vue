@@ -11,7 +11,8 @@ export default {
   props: ['id', 'name', 'memberCount'],
   computed: {
     getTeamMembers() {
-      return '/teams/' + this.id;
+      // return '/teams/' + this.id;
+      return { name: 'teamids', params: { teamId: this.id } };
     },
   },
 };
