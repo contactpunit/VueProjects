@@ -34,6 +34,12 @@ const router = createRouter({
     },
     { path: '/:catchAll(.*)', component: ErrorPage },
   ],
+  scrollBehavior(to, from, pos) {
+    if (pos) {
+      return pos;
+    }
+    return { left: 0, top: 0 };
+  },
   history: createWebHistory(),
 });
 
