@@ -8,6 +8,12 @@
     <button @click="hideDialog">Close it!</button>
   </base-modal>
   <div class="container">
+    <transition>
+      <p v-if="paraIsVisible">This para can be toggled on and off...</p>
+    </transition>
+    <button @click="togglePara">Toggle Para</button>
+  </div>
+  <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
 </template>
@@ -18,6 +24,7 @@ export default {
     return {
       dialogIsVisible: false,
       animatedBlock: false,
+      paraIsVisible: true,
     };
   },
   methods: {
@@ -29,6 +36,9 @@ export default {
     },
     animateBlock() {
       this.animatedBlock = true;
+    },
+    togglePara() {
+      this.paraIsVisible = !this.paraIsVisible;
     },
   },
 };
@@ -79,6 +89,34 @@ button:active {
 .animate {
   /* transform: translateX(-150px); */
   animation: slide-fade 0.3s ease-out forwards;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.v-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
 @keyframes slide-fade {
