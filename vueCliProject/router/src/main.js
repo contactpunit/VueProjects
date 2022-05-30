@@ -31,6 +31,11 @@ const router = createRouter({
       path: '/users',
       name: 'users',
       components: { default: UsersList, footer: UsersFooter },
+      // beforeEnter(to, from, next) {
+      //   console.log(to);
+      //   console.log(from);
+      //   next();
+      // },
     },
     { path: '/:catchAll(.*)', component: ErrorPage },
   ],
@@ -41,6 +46,16 @@ const router = createRouter({
     return { left: 0, top: 0 };
   },
   history: createWebHistory(),
+});
+
+// router.beforeEach((_, _2, next) => {
+//   next();
+// });
+
+router.afterEach((to, from) => {
+  console.log('Global after each');
+  console.log(to);
+  console.log(from);
 });
 
 app.use(router);
