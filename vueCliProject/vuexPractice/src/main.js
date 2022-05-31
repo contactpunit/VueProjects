@@ -28,6 +28,13 @@ const store = createStore({
       else return updated;
     },
   },
+  actions: {
+    increase(context, payload) {
+      setTimeout(() => {
+        context.commit('increase', payload);
+      }, 2000);
+    },
+  },
 });
 
 const app = createApp(App);
