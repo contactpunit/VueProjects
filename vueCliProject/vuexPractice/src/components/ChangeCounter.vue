@@ -6,7 +6,7 @@
 export default {
   methods: {
     addOne() {
-      this.$store.dispatch('increase', { value: 10 });
+      this.$store.dispatch('counters/increase', { value: 10 });
     },
   },
 };
