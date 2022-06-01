@@ -1,6 +1,6 @@
 <template>
-  <button @click="logInUser">Login</button>
-  <button @click="logOutUser">Logout</button>
+  <button @click="logInUser" v-if="!showMe">Login</button>
+  <button @click="logOutUser" v-if="showMe">Logout</button>
 </template>
 
 <script>
@@ -11,6 +11,11 @@ export default {
     },
     logOutUser() {
       this.$store.dispatch('logMeOut');
+    },
+  },
+  computed: {
+    showMe() {
+      return this.$store.getters.isAuthenticated;
     },
   },
 };
