@@ -6,7 +6,6 @@ const store = createStore({
   modules: {
     coaches: coachesModule,
   },
-  state() {},
 });
 
 export default store;
