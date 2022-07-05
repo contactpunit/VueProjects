@@ -46,6 +46,7 @@ export default {
       areas: [],
     };
   },
+  emits: ['submit-data'],
   methods: {
     submit() {
       const formData = {
@@ -56,7 +57,7 @@ export default {
         areas: this.areas,
       };
 
-      console.log(formData);
+      this.$emit('submit-data', formData);
     },
   },
 };
