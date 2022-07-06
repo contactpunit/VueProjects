@@ -16,11 +16,11 @@ export default {
   methods: {
     saveData(data) {
       this.$store.dispatch('coaches/addCoach', {
-        firstName: data.firstname,
-        lastName: data.lastname,
-        hourlyRate: data.rate,
-        description: data.description,
-        areas: Object.values(data.areas),
+        firstName: data.firstname.value,
+        lastName: data.lastname.value,
+        hourlyRate: data.rate.value,
+        description: data.description.value,
+        areas: Object.values(data.areas.value),
       });
       this.$router.replace('/coaches');
     },
