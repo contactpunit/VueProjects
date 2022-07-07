@@ -1,7 +1,7 @@
 export default {
-  addCoach(context, data) {
+  async addCoach(context, data) {
+    const userId = context.rootGetters.userId;
     const coachData = {
-      id: context.rootGetters.userId,
       firstName: data.firstName,
       lastName: data.lastName,
       hourlyRate: data.hourlyRate,
@@ -9,6 +9,21 @@ export default {
       areas: data.areas,
     };
 
-    context.commit('addCoach', coachData);
+    const response = await fetch(
+      `https://coachfinder-4f833-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(coachData),
+      }
+    );
+
+    if (!response.ok) {
+      // error generated
+    }
+
+    context.commit('addCoach', {
+      ...coachData,
+      id: userId,
+    });
   },
 };
