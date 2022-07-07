@@ -26,4 +26,31 @@ export default {
       id: userId,
     });
   },
+
+  async loadCoaches(context) {
+    const response = await fetch(
+      'https://coachfinder-4f833-default-rtdb.firebaseio.com/coaches.json'
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      // error generated
+    }
+
+    const coaches = [];
+    for (const key in data) {
+      const coach = {
+        id: key,
+        firstName: data[key].firstName,
+        lastName: data[key].lastName,
+        hourlyRate: data[key].hourlyRate,
+        description: data[key].description,
+        areas: data[key].areas,
+      };
+      coaches.push(coach);
+    }
+
+    context.commit('setCoaches', coaches);
+  },
 };
