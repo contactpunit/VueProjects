@@ -27,7 +27,9 @@ export default {
     });
   },
 
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) return;
+
     let response;
     try {
       response = await fetch(
@@ -58,5 +60,6 @@ export default {
     }
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   },
 };
