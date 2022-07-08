@@ -1,10 +1,18 @@
 <template>
+  <base-dialog
+    :show="!!error"
+    title="Error getting all requests"
+    @close="closeDialog"
+  >
+    <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <base-card>
       <header>
         <h2>Requests Recieved</h2>
       </header>
-      <ul v-if="hasRequests">
+      <base-spinner v-if="isLoading"></base-spinner>
+      <ul v-else-if="hasRequests && !isLoading">
         <request-item
           v-for="request in allRequests"
           :key="request.id"
@@ -24,7 +32,27 @@ export default {
     RequestItem,
   },
   data() {
-    return {};
+    return {
+      error: null,
+      isLoading: false,
+    };
+  },
+  created() {
+    this.loadRequests();
+  },
+  methods: {
+    closeDialog() {
+      this.error = null;
+    },
+    async loadRequests() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('requests/getAllRequests');
+      } catch (err) {
+        this.error = err.message || 'Failed to fetch requests';
+      }
+      this.isLoading = false;
+    },
   },
   computed: {
     allRequests() {

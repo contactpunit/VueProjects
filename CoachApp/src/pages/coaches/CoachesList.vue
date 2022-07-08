@@ -88,7 +88,6 @@ export default {
         await this.$store.dispatch('coaches/loadCoaches');
       } catch (err) {
         this.error = err.message || 'Something went wrong!!';
-        console.log(!!this.error);
       }
       this.isLoading = false;
     },
