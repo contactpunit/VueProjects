@@ -28,14 +28,20 @@ export default {
   },
 
   async loadCoaches(context) {
-    const response = await fetch(
-      'https://coachfinder-4f833-default-rtdb.firebaseio.com/coaches.json'
-    );
+    let response;
+    try {
+      response = await fetch(
+        'https://coachfinder-4f833-default-rtdb.firebaseio.com/coaches.json'
+      );
+    } catch (err) {
+      throw new Error(err.message || 'Failed to fetch');
+    }
 
     const data = await response.json();
 
     if (!response.ok) {
       // error generated
+      throw new Error(data.message || 'Failed to fetch');
     }
 
     const coaches = [];
