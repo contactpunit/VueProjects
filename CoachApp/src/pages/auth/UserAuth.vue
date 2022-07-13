@@ -1,19 +1,27 @@
 <template>
-  <base-card>
-    <form @submit.prevent="submitForm">
-      <div class="form-control">
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model.trim="email" />
-      </div>
-      <div class="form-control">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model.trim="password" />
-      </div>
-      <p v-if="!formIsValid">Please enter valid email and password</p>
-      <base-button @click="login">Login</base-button>
-      <base-button mode="flat" @click="signUp">Signup</base-button>
-    </form>
-  </base-card>
+  <div>
+    <base-dialog :show="!!error" title="Error" @close="closeDialog">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <base-dialog fixed :show="isLoading" title="Authenticating...">
+      <base-spinner></base-spinner>
+    </base-dialog>
+    <base-card>
+      <form @submit.prevent="submitForm">
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="email" id="email" v-model.trim="email" />
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model.trim="password" />
+        </div>
+        <p v-if="!formIsValid">Please enter valid email and password</p>
+        <base-button @click="login">Login</base-button>
+        <base-button mode="flat" @click="signUp">Signup</base-button>
+      </form>
+    </base-card>
+  </div>
 </template>
 
 <script>
@@ -24,29 +32,41 @@ export default {
       password: '',
       formIsValid: true,
       mode: 'login',
+      isLoading: false,
+      error: null,
     };
   },
   methods: {
+    closeDialog() {
+      this.error = null;
+    },
     login() {
       this.mode = 'login';
     },
     signUp() {
       this.mode = 'signup';
     },
-    submitForm() {
+    async submitForm() {
       this.formIsValid = true;
       if (!this.email || !this.password || this.password.length < 6) {
         this.formIsValid = false;
         return;
       }
-      if (this.mode === 'login') {
-        // do something
-      } else {
-        this.$store.dispatch('signup', {
-          email: this.email,
-          password: this.password,
-        });
+
+      this.isLoading = true;
+      try {
+        if (this.mode === 'login') {
+          // do something
+        } else {
+          await this.$store.dispatch('signup', {
+            email: this.email,
+            password: this.password,
+          });
+        }
+      } catch (err) {
+        this.error = err.message || 'Failed to signup/login';
       }
+      this.isLoading = false;
     },
   },
 };
