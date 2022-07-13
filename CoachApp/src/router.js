@@ -6,12 +6,14 @@ import CoachRegistration from './pages/coaches/CoachRegistration.vue';
 import RequestsReceived from './pages/requests/RequestsReceived.vue';
 import ContactCoach from './pages/requests/ContactCoach.vue';
 import CatchAll from './pages/CatchAll.vue';
+import UserAuth from './pages/auth/UserAuth.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/coaches' },
     { path: '/coaches', component: CoachesList },
+    { path: '/auth', component: UserAuth },
     {
       path: '/coaches/:id',
       props: true,
