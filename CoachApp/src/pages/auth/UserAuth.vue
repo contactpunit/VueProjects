@@ -60,7 +60,12 @@ export default {
             email: this.email,
             password: this.password,
           });
-          this.$router.replace('/coaches');
+          const redirectUrl = this.$route.query.redirect;
+          if (redirectUrl) {
+            this.$router.replace('/register');
+          } else {
+            this.$router.replace('/coaches');
+          }
         } else {
           await this.$store.dispatch('signup', {
             email: this.email,
