@@ -35,7 +35,6 @@ export default {
       }
     );
     const resData = await response.json();
-    console.log(resData);
     if (!response.ok) {
       throw new Error(resData.message || 'Failed to authenticate');
     }
@@ -43,6 +42,14 @@ export default {
       token: resData.idToken,
       userId: resData.localId,
       tokenExpiration: resData.expiresIn,
+    });
+  },
+
+  async logout(context) {
+    context.commit('setUser', {
+      token: null,
+      userId: null,
+      tokenExpiration: null,
     });
   },
 };
