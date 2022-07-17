@@ -60,6 +60,7 @@ export default {
             email: this.email,
             password: this.password,
           });
+          this.$router.replace('/coaches');
         } else {
           await this.$store.dispatch('signup', {
             email: this.email,
