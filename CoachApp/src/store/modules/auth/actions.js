@@ -15,7 +15,12 @@ export default {
     });
   },
 
-  async logout(context) {
+  autoLogout(context) {
+    context.dispatch('logout');
+    context.commit('setAutoLogout');
+  },
+
+  logout(context) {
     const token = localStorage.getItem('token');
     if (token) {
       localStorage.removeItem('token');
@@ -31,7 +36,7 @@ export default {
   autoLogin(context) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
-    const expirationDate = localStorage.getItem();
+    const expirationDate = localStorage.getItem('expiresIn');
     if (token && userId) {
       context.commit('setUser', {
         token,
@@ -44,7 +49,7 @@ export default {
     }
 
     timer = setTimeout(() => {
-      context.dispatch('logout');
+      context.dispatch('autoLogout');
     }, expiresIn);
   },
 
@@ -79,7 +84,7 @@ export default {
     localStorage.setItem('tokenExpiration', expirationDate);
 
     timer = setTimeout(() => {
-      context.dispatch('logout');
+      context.dispatch('autoLogout');
     }, expiresIn);
 
     context.commit('setUser', {
