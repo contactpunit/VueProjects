@@ -1,3 +1,5 @@
+let timer;
+
 export default {
   async signup(context, payload) {
     return context.dispatch('auth', {
@@ -14,23 +16,36 @@ export default {
   },
 
   async logout(context) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+    }
+    clearTimeout(timer);
     context.commit('setUser', {
       token: null,
       userId: null,
-      tokenExpiration: null,
     });
   },
 
   autoLogin(context) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
+    const expirationDate = localStorage.getItem();
     if (token && userId) {
       context.commit('setUser', {
         token,
         userId,
-        tokenExpiration: null,
       });
     }
+    const expiresIn = +expirationDate - new Date().getTime();
+    if (expiresIn < 0) {
+      return;
+    }
+
+    timer = setTimeout(() => {
+      context.dispatch('logout');
+    }, expiresIn);
   },
 
   async auth(context, payload) {
@@ -38,10 +53,10 @@ export default {
     let url;
     if (mode === 'signup') {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=api_key';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=apikey';
     } else {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=api_key';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=apikey';
     }
     const response = await fetch(url, {
       method: 'POST',
@@ -56,14 +71,20 @@ export default {
       throw new Error(resData.message || 'Failed to authenticate');
     }
 
+    const expiresIn = +resData.expiresIn * 1000;
+    const expirationDate = expiresIn + new Date().getTime();
+
     localStorage.setItem('token', resData.idToken);
     localStorage.setItem('userId', resData.localId);
-    localStorage.setItem('tokenExpiration', resData.expiresIn);
+    localStorage.setItem('tokenExpiration', expirationDate);
+
+    timer = setTimeout(() => {
+      context.dispatch('logout');
+    }, expiresIn);
 
     context.commit('setUser', {
       token: resData.idToken,
       userId: resData.localId,
-      tokenExpiration: resData.expiresIn,
     });
   },
 };
