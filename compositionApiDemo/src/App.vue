@@ -18,9 +18,10 @@
         type="text"
         placeholder="Last Name"
         name="lastname"
-        v-model="lastName"
+        ref="lastNameInput"
       />
     </div>
+    <button @click="setLastName">Set Name</button>
   </section>
 </template>
 
@@ -31,6 +32,7 @@ export default {
     const age = ref(33);
     const firstName = ref('');
     const lastName = ref('');
+    const lastNameInput = ref(null);
 
     const fullName = computed(function () {
       return firstName.value + ' ' + lastName.value;
@@ -44,7 +46,20 @@ export default {
     function changeAge() {
       age.value = 44;
     }
-    return { age, fullName, changeAge, firstName, lastName };
+
+    function setLastName() {
+      lastName.value = lastNameInput.value.value;
+    }
+
+    return {
+      age,
+      fullName,
+      changeAge,
+      firstName,
+      lastName,
+      setLastName,
+      lastNameInput,
+    };
   },
 };
 </script>
