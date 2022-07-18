@@ -9,7 +9,7 @@
         type="text"
         placeholder="First Name"
         name="firstname"
-        @input="getFirstName"
+        v-model="firstName"
       />
     </div>
     <div>
@@ -18,7 +18,7 @@
         type="text"
         placeholder="Last Name"
         name="lastname"
-        @input="getLastName"
+        v-model="lastName"
       />
     </div>
   </section>
@@ -32,14 +32,6 @@ export default {
     const firstName = ref('');
     const lastName = ref('');
 
-    function getFirstName(event) {
-      firstName.value = event.target.value;
-    }
-
-    function getLastName(event) {
-      lastName.value = event.target.value;
-    }
-
     const fullName = computed(function () {
       return firstName.value + ' ' + lastName.value;
     });
@@ -47,7 +39,7 @@ export default {
     function changeAge() {
       age.value = 44;
     }
-    return { age, fullName, changeAge, getFirstName, getLastName };
+    return { age, fullName, changeAge, firstName, lastName };
   },
 };
 </script>
