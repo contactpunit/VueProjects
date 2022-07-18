@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 export default {
   setup() {
-    const user = ref({
+    const user = reactive({
       name: 'Punit',
       age: 33,
     });
