@@ -4,12 +4,20 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 export default {
   props: ['firstName', 'lastName', 'age'],
-  computed: {
-    userName() {
-      return this.firstName + ' ' + this.lastName;
-    },
+  setup(props) {
+    const userName = computed(function () {
+      return props.firstName + ' ' + props.lastName;
+    });
+
+    return { userName };
   },
+  // computed: {
+  //   userName() {
+  //     return this.firstName + ' ' + this.lastName;
+  //   },
+  // },
 };
 </script>
