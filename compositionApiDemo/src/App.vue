@@ -1,16 +1,26 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age }}</h3>
   </section>
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
-  data() {
-    return {
-      userName: 'Maximilian',
-    };
+  setup() {
+    const user = ref({
+      name: 'Punit',
+      age: 33,
+    });
+
+    return { user };
   },
+  // data() {
+  //   return {
+  //     userName: 'Punit',
+  //   };
+  // },
 };
 </script>
 
