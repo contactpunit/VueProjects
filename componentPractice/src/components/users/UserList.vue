@@ -2,8 +2,8 @@
   <base-card>
     <h2>Active Users</h2>
     <base-search></base-search>
-    <button>Sort Ascending</button>
-    <button>Sort Descending</button>
+    <button @click="sortUsers('asc')">Sort Ascending</button>
+    <button @click="sortUsers('desc')">Sort Descending</button>
     <ul v-for="user in users" :key="user.id">
       <user-item
         :fullName="user.fullName"
@@ -26,6 +26,11 @@ export default {
     UserItem,
   },
   props: ['users'],
+  methods: {
+    sortUsers(action) {
+      this.$emit('sort-users', action);
+    },
+  },
 };
 </script>
 

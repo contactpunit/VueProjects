@@ -1,6 +1,6 @@
 <template>
   <main>
-    <user-list :users="allActiveUsers"></user-list>
+    <user-list :users="allUsers" @sort-users="sortUserList"></user-list>
     <project-list :reqUser="userData"></project-list>
   </main>
 </template>
@@ -13,11 +13,6 @@ export default {
     UserList,
     ProjectList,
   },
-  computed: {
-    allActiveUsers() {
-      return this.$store.getters.getUsers;
-    },
-  },
   provide() {
     return {
       viewProjects: this.viewUserProjects,
@@ -25,12 +20,40 @@ export default {
   },
   data() {
     return {
+      allUsers: null,
       userData: null,
     };
   },
+  created() {
+    const users = this.$store.getters.getUsers;
+    this.allUsers = users;
+  },
   methods: {
+    sortUserList(action) {
+      if (action === 'asc') {
+        this.allUsers.sort((a, b) => {
+          if (a.fullName > b.fullName) {
+            return 1;
+          }
+          if (b.fullName > a.fullName) {
+            return -1;
+          }
+          return 0;
+        });
+      } else if (action === 'desc') {
+        this.allUsers.sort((a, b) => {
+          if (a.fullName > b.fullName) {
+            return -1;
+          }
+          if (b.fullName > a.fullName) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+    },
     viewUserProjects(id) {
-      const reqUser = this.allActiveUsers.find((user) => user.id === id);
+      const reqUser = this.allUsers.find((user) => user.id === id);
       if (reqUser) {
         this.userData = reqUser;
       } else return null;
