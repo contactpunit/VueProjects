@@ -1,7 +1,7 @@
 <template>
   <section>
     <input
-      type="text"
+      type="search"
       placeholder="Filter Items"
       name="filter"
       @input="search"
@@ -13,7 +13,7 @@
 export default {
   methods: {
     search(event) {
-      console.log(event.target.value);
+      this.$emit('search', event.target.value);
     },
   },
 };

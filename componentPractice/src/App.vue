@@ -1,6 +1,10 @@
 <template>
   <main>
-    <user-list :users="allUsers" @sort-users="sortUserList"></user-list>
+    <user-list
+      :users="filteredUsers"
+      @sort-users="sortUserList"
+      @search-users="filterUsers"
+    ></user-list>
     <project-list :reqUser="userData"></project-list>
   </main>
 </template>
@@ -22,11 +26,13 @@ export default {
     return {
       allUsers: null,
       userData: null,
+      filteredUsers: null,
     };
   },
   created() {
     const users = this.$store.getters.getUsers;
     this.allUsers = users;
+    this.filteredUsers = users;
   },
   methods: {
     sortUserList(action) {
@@ -51,6 +57,12 @@ export default {
           return 0;
         });
       }
+    },
+    filterUsers(value) {
+      const searchedUsers = this.allUsers.filter((user) =>
+        user.fullName.includes(value)
+      );
+      this.filteredUsers = searchedUsers;
     },
     viewUserProjects(id) {
       const reqUser = this.allUsers.find((user) => user.id === id);

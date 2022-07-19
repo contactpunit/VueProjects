@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <h2>Active Users</h2>
-    <base-search></base-search>
+    <base-search @search="searchUsers"></base-search>
     <button @click="sortUsers('asc')">Sort Ascending</button>
     <button @click="sortUsers('desc')">Sort Descending</button>
     <ul v-for="user in users" :key="user.id">
@@ -15,20 +15,19 @@
 </template>
 
 <script>
-import BaseCard from '../ui/BaseCard.vue';
-import BaseSearch from '../ui/BaseSearch.vue';
 import UserItem from './UserItem.vue';
 
 export default {
   components: {
-    BaseCard,
-    BaseSearch,
     UserItem,
   },
   props: ['users'],
   methods: {
     sortUsers(action) {
       this.$emit('sort-users', action);
+    },
+    searchUsers(value) {
+      this.$emit('search-users', value);
     },
   },
 };

@@ -1,13 +1,27 @@
 <template>
   <h3>{{ user.fullName }}</h3>
-  <ul v-for="project in user.projects" :key="project.id">
+  <ul v-for="project in displayProjects" :key="project.id">
     <li>{{ project.title }}</li>
   </ul>
 </template>
 
 <script>
 export default {
-  props: ['user'],
+  props: ['user', 'filteredProjects'],
+  data() {
+    return {
+      projects: [],
+    };
+  },
+  computed: {
+    displayProjects() {
+      if (this.filteredProjects.length) {
+        return this.filteredProjects;
+      } else {
+        return this.user.projects;
+      }
+    },
+  },
 };
 </script>
 

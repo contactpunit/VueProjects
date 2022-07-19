@@ -1,22 +1,35 @@
 <template>
   <base-card>
     <h2>Projects</h2>
-    <base-search></base-search>
-    <project-item v-if="reqUser" :user="reqUser"></project-item>
+    <base-search @search="searchProjects"></base-search>
+    <project-item
+      v-if="reqUser"
+      :user="reqUser"
+      :filteredProjects="filteredProjects"
+    ></project-item>
     <p v-else>No user selected</p>
   </base-card>
 </template>
 
 <script>
-import BaseCard from '../ui/BaseCard.vue';
-import BaseSearch from '../ui/BaseSearch.vue';
 import ProjectItem from './ProjectItem.vue';
 export default {
   props: ['reqUser'],
+  data() {
+    return {
+      filteredProjects: [],
+    };
+  },
   components: {
-    BaseCard,
-    BaseSearch,
     ProjectItem,
+  },
+  methods: {
+    searchProjects(value) {
+      const projects = this.reqUser.projects.filter((proj) =>
+        proj.title.includes(value)
+      );
+      if (projects.length) this.filteredProjects = projects;
+    },
   },
 };
 </script>
