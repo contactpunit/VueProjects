@@ -1,0 +1,1 @@
+<template>Add a new product</template>
