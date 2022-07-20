@@ -3,7 +3,7 @@
     <h3>{{ title }}</h3>
     <h4>{{ price }}</h4>
     <p>{{ description }}</p>
-    <router-link :to="detailLink">View Details</router-link>
+    <router-link :to="detailLink" :id="id">View Details</router-link>
   </base-container>
 </template>
 
