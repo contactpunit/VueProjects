@@ -1,7 +1,47 @@
 <template>
+  <base-dialog v-if="showError" :title="title" :dialogMessage="dialogMessage">
+  </base-dialog>
+  <add-user @popDialog="popUpDialog"></add-user>
+  <delete-user @popDialog="popUpDialog"></delete-user>
 </template>
 
 <script>
+import AddUser from './components/AddUser.vue';
+import DeleteUser from './components/DeleteUser.vue';
+
+export default {
+  components: {
+    AddUser,
+    DeleteUser,
+  },
+  data() {
+    return {
+      title: null,
+      dialogMessage: null,
+      showError: false,
+    };
+  },
+  provide() {
+    return {
+      closeDialog: this.closeDialog,
+    };
+  },
+  methods: {
+    closeDialog() {
+      this.showError = false;
+    },
+    popUpDialog(action) {
+      this.showError = true;
+      if (action === 'add') {
+        this.title = 'Add User?';
+        this.dialogMessage = 'Do you want to continue adding a user?';
+      } else if (action === 'delete') {
+        this.title = 'Delete User?';
+        this.dialogMessage = 'Do you want to continue deleting a user?';
+      }
+    },
+  },
+};
 </script>
 
 <style>
