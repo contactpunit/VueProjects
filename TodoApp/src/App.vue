@@ -5,7 +5,13 @@
   </div>
   <div class="container">
     <h3>ToDo List</h3>
-    <todo-list v-for="todo in getTodos" :key="todo" :todo="todo"></todo-list>
+    <todo-list
+      v-for="todo in getTodos"
+      :key="todo"
+      :todo="todo"
+      :id="todo"
+      @delete-todo="deleteTodo"
+    ></todo-list>
   </div>
 </template>
 
@@ -24,6 +30,12 @@ export default {
     },
   },
   methods: {
+    deleteTodo(id) {
+      const entry = this.getTodos.findIndex((todo) => todo === id);
+      if (entry > -1) {
+        this.$store.dispatch('deleteTodo', entry);
+      }
+    },
     addData(text) {
       this.$store.dispatch('addTodo', { todo: text });
     },
