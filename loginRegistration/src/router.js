@@ -5,7 +5,7 @@ import RegisterPage from './components/pages/RegisterPage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
-  paths: [
+  routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: LoginPage },
     { path: '/register', component: RegisterPage },
