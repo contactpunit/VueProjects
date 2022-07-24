@@ -11,7 +11,7 @@
         <input type="password" name="password" v-model.trim="password" />
       </div>
       <div class="form-group">
-        <button>Register</button>
+        <button class="btn btn-primary">Register</button>
         <button>Login</button>
       </div>
     </form>
