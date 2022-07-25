@@ -1,4 +1,11 @@
 <template>
+  <base-dialog
+    v-if="error"
+    title="Register Failed"
+    :errMessage="error"
+    @clear-error="resetError"
+  >
+  </base-dialog>
   <div>
     <h2>Register</h2>
     <form @submit.prevent="registerUser">
@@ -27,17 +34,17 @@
       </div>
       <p v-if="!lastname.isValid">missing lastname</p>
       <div>
-        <label for="username">Username</label>
+        <label for="email">Email</label>
         <input
-          type="text"
-          name="username"
+          type="email"
+          name="email"
           class="form-control"
-          v-model.trim="username.value"
-          :class="{ invalid: !username.isValid }"
-          @input="clearValidity('username')"
+          v-model.trim="email.value"
+          :class="{ invalid: !email.isValid }"
+          @input="clearValidity('email')"
         />
       </div>
-      <p v-if="!username.isValid">missing username</p>
+      <p v-if="!email.isValid">missing email</p>
       <div>
         <label for="password">Password</label>
         <input
@@ -52,7 +59,7 @@
       <p v-if="!password.isValid">missing password</p>
       <div class="form-group">
         <button class="btn btn-primary">Register</button>
-        <button class="btn btn-link">Cancel</button>
+        <button class="btn btn-link" @click="cancelRegister">Cancel</button>
       </div>
     </form>
   </div>
@@ -62,7 +69,8 @@
 export default {
   data() {
     return {
-      username: {
+      error: null,
+      email: {
         value: '',
         isValid: true,
       },
@@ -82,6 +90,12 @@ export default {
     };
   },
   methods: {
+    cancelRegister() {
+      this.$router.replace('/');
+    },
+    resetError() {
+      this.error = false;
+    },
     clearValidity(field) {
       if (!this[field].value) {
         this[field].isValid = false;
@@ -89,15 +103,27 @@ export default {
       }
       this[field].isValid = true;
     },
-    registerUser() {
+    async registerUser() {
       this.formIsValid = true;
       if (
         !this.firstname.value ||
         !this.lastname.value ||
-        !this.username.value ||
+        !this.email.value ||
         !this.password.value
       ) {
         this.formIsValid = false;
+      }
+      if (this.formIsValid) {
+        try {
+          await this.$store.dispatch('addUser', {
+            firstname: this.firstname.value,
+            lastname: this.lastname.value,
+            email: this.email.value,
+            password: this.password.value,
+          });
+        } catch (err) {
+          this.error = err.message;
+        }
       }
     },
   },
