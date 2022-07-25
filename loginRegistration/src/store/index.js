@@ -16,7 +16,7 @@ const store = createStore({
       let response;
       try {
         const registerUrl =
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCvXIsWvOo6yg7FLv4gCrnFlqMUXvAsxZk';
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=apikey';
         response = await fetch(registerUrl, {
           method: 'POST',
           body: JSON.stringify({
