@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './components/pages/LoginPage.vue';
 import RegisterPage from './components/pages/RegisterPage.vue';
 import HomePage from './components/pages/HomePage.vue';
+import CatchAll from './components/pages/CatchAll.vue';
 
 import store from './store/index.js';
 
@@ -30,6 +31,7 @@ const router = createRouter({
         requiresAuth: false,
       },
     },
+    { path: '/:catchall(.*)', component: CatchAll },
   ],
 });
 
