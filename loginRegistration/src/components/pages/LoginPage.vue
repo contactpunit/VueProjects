@@ -65,6 +65,9 @@ export default {
           email: this.username.value,
           password: this.password.value,
         });
+        // this.$router.replace('/');
+        console.log(this.$store.getters.userLoggedIn);
+        this.$router.replace('/');
       } catch (err) {
         console.log(err.message);
       }

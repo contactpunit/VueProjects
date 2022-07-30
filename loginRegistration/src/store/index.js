@@ -8,11 +8,19 @@ const store = createStore({
       expiryTime: '',
       isLoggedIn: false,
       email: '',
+      fullname: '',
     };
   },
   getters: {
     userLoggedIn(state) {
-      return state;
+      return state.isLoggedIn;
+    },
+    getFullName(state) {
+      console.log(state.isLoggedIn);
+      if (state.isLoggedIn) {
+        return state.fullname;
+      }
+      return '';
     },
   },
   actions: {
@@ -39,6 +47,8 @@ const store = createStore({
         return;
       } else {
         const { expiresIn, localId, idToken } = data;
+        console.log(localId);
+        console.log(idToken);
         const expiryTime = new Date(
           new Date().setTime(new Date().getTime() + +expiresIn * 1000)
         );
@@ -52,7 +62,9 @@ const store = createStore({
           localId,
           idToken,
           email: payload.email,
+          fullname: payload.email.split('@')[0],
         });
+        console.log(context.getters.userLoggedIn);
       }
     },
     async addUser(_, payload) {
@@ -90,6 +102,7 @@ const store = createStore({
       state.expiryTime = payload.expiryTime;
       state.isLoggedIn = true;
       state.email = payload.email;
+      state.fullname = payload.fullname;
     },
   },
 });

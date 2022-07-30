@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Hi {{ title }}</h1>
+    <h1>Hi {{ fullname }}</h1>
     <p>You're logged in with Vue + Vuex & JWT!!</p>
     <h2>Users from secure api end point:</h2>
     <li>{{ fullname }} - <a>Delete</a></li>
@@ -10,6 +10,10 @@
 
 <script>
 export default {
-  props: ['title'],
+  computed: {
+    fullname() {
+      return this.$store.getters.getFullName;
+    },
+  },
 };
 </script>
