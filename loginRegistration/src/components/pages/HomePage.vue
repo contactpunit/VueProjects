@@ -4,7 +4,7 @@
     <p>You're logged in with Vue + Vuex & JWT!!</p>
     <h2>Users from secure api end point:</h2>
     <li>{{ fullname }} - <a>Delete</a></li>
-    <button class="btn-link btn">Logout</button>
+    <button class="btn-link btn" @click="logout">Logout</button>
   </div>
 </template>
 
@@ -13,6 +13,12 @@ export default {
   computed: {
     fullname() {
       return this.$store.getters.getFullName;
+    },
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout');
+      this.$router.replace('/login');
     },
   },
 };

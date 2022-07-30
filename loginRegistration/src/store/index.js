@@ -47,8 +47,6 @@ const store = createStore({
         return;
       } else {
         const { expiresIn, localId, idToken } = data;
-        console.log(localId);
-        console.log(idToken);
         const expiryTime = new Date(
           new Date().setTime(new Date().getTime() + +expiresIn * 1000)
         );
@@ -56,6 +54,8 @@ const store = createStore({
         localStorage.setItem('localId', localId);
         localStorage.setItem('idToken', idToken);
         localStorage.setItem('expiryTime', expiryTime);
+        localStorage.setItem('fullname', payload.email.split('@')[0]);
+        localStorage.setItem('isLoggedIn', true);
 
         context.commit('loginUser', {
           expiryTime,
@@ -66,6 +66,9 @@ const store = createStore({
         });
         console.log(context.getters.userLoggedIn);
       }
+    },
+    async logout(context) {
+      context.commit('logout');
     },
     async addUser(_, payload) {
       let response;
@@ -96,6 +99,21 @@ const store = createStore({
     },
   },
   mutations: {
+    logout(state) {
+      console.log(' i am invoke');
+      localStorage.removeItem('idToken');
+      localStorage.removeItem('localId');
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('expiryTime');
+      localStorage.removeItem('email');
+      localStorage.removeItem('fullname');
+      state.idToken = '';
+      state.localId = '';
+      state.expiryTime = '';
+      state.isLoggedIn = false;
+      state.email = '';
+      state.fullname = '';
+    },
     loginUser(state, payload) {
       state.idToken = payload.idToken;
       state.localId = payload.localId;
