@@ -12,3 +12,14 @@
     <base-footer></base-footer>
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    if (loggedIn) {
+      this.$router.replace('/');
+    }
+  },
+};
+</script>

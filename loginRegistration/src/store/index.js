@@ -12,18 +12,47 @@ const store = createStore({
     };
   },
   getters: {
-    userLoggedIn(state) {
-      return state.isLoggedIn;
+    userLoggedIn() {
+      return localStorage.getItem('isLoggedIn');
     },
-    getFullName(state) {
-      console.log(state.isLoggedIn);
-      if (state.isLoggedIn) {
-        return state.fullname;
+    getFullName() {
+      if (localStorage.getItem('isLoggedIn')) {
+        return localStorage.getItem('fullname');
       }
       return '';
     },
   },
   actions: {
+    async deleteUser() {
+      let response;
+      const idToken = localStorage.getItem('idToken');
+      if (!idToken) {
+        console.log('delete user failed');
+      }
+      try {
+        const deleteUrl =
+          'https://identitytoolkit.googleapis.com/v1/accounts:delete?key=apikey';
+        response = await fetch(deleteUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            idToken,
+          }),
+        });
+        if (!response.ok) {
+          console.log('user deletion failed');
+          return;
+        }
+        if (response.status === 200) {
+          localStorage.removeItem('fullname');
+          localStorage.removeItem('idToken');
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('expiryTime');
+          localStorage.removeItem('localId');
+        }
+      } catch (err) {
+        console.log(`error deleting user ${err.message}`);
+      }
+    },
     async loginUser(context, payload) {
       let response;
       try {
@@ -64,7 +93,6 @@ const store = createStore({
           email: payload.email,
           fullname: payload.email.split('@')[0],
         });
-        console.log(context.getters.userLoggedIn);
       }
     },
     async logout(context) {
@@ -100,7 +128,6 @@ const store = createStore({
   },
   mutations: {
     logout(state) {
-      console.log(' i am invoke');
       localStorage.removeItem('idToken');
       localStorage.removeItem('localId');
       localStorage.removeItem('isLoggedIn');
