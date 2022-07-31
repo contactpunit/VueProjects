@@ -27,6 +27,7 @@
 
 <script>
 import SelectCountry from './components/SelectCountry.vue';
+
 export default {
   components: {
     SelectCountry,

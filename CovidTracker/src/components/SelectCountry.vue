@@ -19,18 +19,12 @@ export default {
       allCountries: [],
     };
   },
-  //   async created() {
-  //     const response = await fetch('https://api.covid19api.com/countries', {
-  //       method: 'GET',
-  //     });
-  //     const data = await response.json();
-  //     if (response.ok) {
-  //       this.allCountries = data;
-  //     }
-  //   },
+  async created() {
+    this.allCountries = await this.$store.getters.getCountries;
+  },
   methods: {
     optionSelected() {
-      console.log(this.selected);
+      // console.log(this.selected);
     },
   },
 };
