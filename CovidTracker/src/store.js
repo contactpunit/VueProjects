@@ -7,27 +7,36 @@ const store = createStore({
     };
   },
   getters: {
-    async getCountries(state) {
-      if (state.countries.length) return state.countries;
-      const localData = localStorage.getItem('countries');
-      let allCountries = JSON.parse(localData);
-      if (allCountries && allCountries.length) return allCountries;
-      console.log('i am invoked');
-      const response = await fetch('https://api.covid19api.com/countries', {
-        method: 'GET',
-      });
-      const data = await response.json();
-      if (response.ok) {
-        allCountries = data;
-        localStorage.setItem('countries', JSON.stringify(allCountries));
-        state.countries = allCountries;
-        return allCountries;
-      }
-      return [];
+    getCountries(state) {
+      return state.countries;
     },
   },
-  actions: {},
-  mutations: {},
+  actions: {
+    async setCountries({ commit, getters }) {
+      const countries = getters.getCountries;
+      if (!countries || !countries.length) {
+        const localData = localStorage.getItem('countries');
+        if (localData && JSON.parse(localData).length) {
+          commit('setCountries', JSON.parse(localData));
+        } else {
+          const response = await fetch('https://api.covid19api.com/summary', {
+            method: 'GET',
+          });
+          const data = await response.json();
+          if (response.ok) {
+            const allCountries = data.Countries;
+            localStorage.setItem('countries', JSON.stringify(allCountries));
+            commit('setCountries', allCountries);
+          }
+        }
+      }
+    },
+  },
+  mutations: {
+    setCountries(state, payload) {
+      state.countries = payload;
+    },
+  },
 });
 
 export default store;

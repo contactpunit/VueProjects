@@ -1,12 +1,12 @@
 <template>
   <select v-model="selected" @change="optionSelected">
-    <option value="0">Select Country</option>
+    <option value="country.Slug">Select Country</option>
     <option
       v-for="country in allCountries"
-      :key="country.Slug"
-      :value="country.ISO2"
+      :key="country.ID"
+      :value="country.Country"
     >
-      {{ country.Country }}
+      {{ country.Slug }}
     </option>
   </select>
 </template>
@@ -20,11 +20,12 @@ export default {
     };
   },
   async created() {
-    this.allCountries = await this.$store.getters.getCountries;
+    await this.$store.dispatch('setCountries');
+    this.allCountries = this.$store.getters.getCountries;
   },
   methods: {
     optionSelected() {
-      // console.log(this.selected);
+      console.log(this.selected);
     },
   },
 };
