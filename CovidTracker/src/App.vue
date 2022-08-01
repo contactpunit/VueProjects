@@ -10,31 +10,54 @@
       </div>
     </section>
   </div>
-  <section class="container cases">
-    <h3>Cases</h3>
-    <div><strong>New: </strong>{{ newCases }}</div>
-    <div><strong>Total: </strong>{{ totalCases }}</div>
-  </section>
-  <section class="container deaths">
-    <h3>Deaths</h3>
-    <div><strong>New: </strong>{{ newDeaths }}</div>
-    <div><strong>Total: </strong>{{ totalDeaths }}</div>
-  </section>
+  <display-data
+    :newDeaths="newDeaths"
+    :newCases="newCases"
+    :totalCases="totalCases"
+    :totalDeaths="totalDeaths"
+  ></display-data>
   <div>
-    <select-country></select-country>
+    <select-country @ctry-select="setCountryValues($event)"></select-country>
   </div>
 </template>
 
 <script>
 import SelectCountry from './components/SelectCountry.vue';
+import DisplayData from './components/DisplayData.vue';
 
 export default {
   components: {
     SelectCountry,
+    DisplayData,
+  },
+  data() {
+    return {
+      newDeaths: '',
+      totalDeaths: '',
+      newCases: '',
+      totalCases: '',
+    };
   },
   computed: {
     currentDate() {
       return new Date().toUTCString();
+    },
+  },
+  methods: {
+    setCountryValues(countryName) {
+      const storeData = this.$store.getters.getCountries;
+      const allCountries = storeData;
+      if (allCountries.length) {
+        const matchCountry = allCountries.find(
+          (ctry) => ctry.Country === countryName
+        );
+        if (matchCountry) {
+          this.totalCases = matchCountry.TotalConfirmed;
+          this.totalDeaths = matchCountry.TotalDeaths;
+          this.newCases = matchCountry.NewConfirmed;
+          this.newDeaths = matchCountry.NewDeaths;
+        }
+      }
     },
   },
 };

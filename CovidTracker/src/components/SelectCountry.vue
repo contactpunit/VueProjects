@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  emits: ['ctry-select'],
   data() {
     return {
       selected: 0,
@@ -26,6 +27,7 @@ export default {
   methods: {
     optionSelected() {
       console.log(this.selected);
+      this.$emit('ctry-select', this.selected);
     },
   },
 };
