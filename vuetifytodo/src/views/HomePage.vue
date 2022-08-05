@@ -1,3 +1,15 @@
 <template>
-  <h1>This is home page</h1>
+  <v-list flat>
+    <v-list-item>
+      <template v-slot:default="{ active }">
+        <v-list-item-action>
+          <v-checkbox :input-value="active"></v-checkbox>
+        </v-list-item-action>
+
+        <v-list-item-content>
+          <v-list-item-title>Learn Vue!</v-list-item-title>
+        </v-list-item-content>
+      </template>
+    </v-list-item>
+  </v-list>
 </template>
