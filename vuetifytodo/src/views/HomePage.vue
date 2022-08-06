@@ -11,7 +11,7 @@
       label="Add Task"
       append-icon="mdi-plus"
     ></v-text-field>
-    <v-list flat class="pt-0">
+    <v-list flat class="pt-0" v-if="tasks.length">
       <div v-for="task in tasks" :key="task.id">
         <v-list-item
           :class="{ 'blue lighten-4': task.done }"
@@ -39,6 +39,11 @@
         <v-divider></v-divider>
       </div>
     </v-list>
+
+    <div v-else class="no-tasks">
+      <v-icon color="primary" size="100"> mdi-check </v-icon>
+      <div class="text-h5 primary--text">Add new tasks</div>
+    </div>
   </div>
 </template>
 
@@ -56,26 +61,26 @@ export default {
       newTask: null,
       newId: 0,
       tasks: [
-        {
-          id: 1,
-          title: "Learn Vue!",
-          done: false,
-        },
-        {
-          id: 2,
-          title: "Master Vue!",
-          done: false,
-        },
-        {
-          id: 3,
-          title: "Learn Vuetify!",
-          done: false,
-        },
-        {
-          id: 4,
-          title: "Master Nodejs",
-          done: false,
-        },
+        // {
+        //   id: 1,
+        //   title: "Learn Vue!",
+        //   done: false,
+        // },
+        // {
+        //   id: 2,
+        //   title: "Master Vue!",
+        //   done: false,
+        // },
+        // {
+        //   id: 3,
+        //   title: "Learn Vuetify!",
+        //   done: false,
+        // },
+        // {
+        //   id: 4,
+        //   title: "Master Nodejs",
+        //   done: false,
+        // },
       ],
     };
   },
@@ -100,3 +105,12 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.no-tasks
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  opacity: 0.5
+</style>
