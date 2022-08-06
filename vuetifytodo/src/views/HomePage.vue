@@ -11,8 +11,8 @@
       label="Add Task"
       append-icon="mdi-plus"
     ></v-text-field>
-    <v-list flat class="pt-0" v-if="tasks.length">
-      <div v-for="task in tasks" :key="task.id">
+    <v-list flat class="pt-0" v-if="allTasks.length">
+      <div v-for="task in allTasks" :key="task.id">
         <v-list-item
           :class="{ 'blue lighten-4': task.done }"
           @click="selectChange(task.id)"
@@ -50,9 +50,9 @@
 <script>
 export default {
   created() {
-    if (!this.tasks.length) this.newId = 1;
+    if (!this.allTasks.length) this.newId = 1;
     else {
-      const sorted = this.tasks.map((task) => task.id).sort((a, b) => b - a);
+      const sorted = this.allTasks.map((task) => task.id).sort((a, b) => b - a);
       this.newId = +sorted[0] + 1;
     }
   },
@@ -60,29 +60,12 @@ export default {
     return {
       newTask: null,
       newId: 0,
-      tasks: [
-        // {
-        //   id: 1,
-        //   title: "Learn Vue!",
-        //   done: false,
-        // },
-        // {
-        //   id: 2,
-        //   title: "Master Vue!",
-        //   done: false,
-        // },
-        // {
-        //   id: 3,
-        //   title: "Learn Vuetify!",
-        //   done: false,
-        // },
-        // {
-        //   id: 4,
-        //   title: "Master Nodejs",
-        //   done: false,
-        // },
-      ],
     };
+  },
+  computed: {
+    allTasks() {
+      return this.$store.state.tasks;
+    },
   },
   methods: {
     selectChange(id) {
