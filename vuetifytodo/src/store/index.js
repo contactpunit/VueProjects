@@ -33,7 +33,14 @@ export default new Vuex.Store({
       return state.tasks
     },
   },
-  mutations: {},
-  actions: {},
-  getters: {},
+  mutations: {
+    addTask(state, payload) {
+      state.tasks.push(payload)
+    },
+  },
+  actions: {
+    addTask(context, payload) {
+      context.commit("addTask", payload)
+    },
+  },
 })

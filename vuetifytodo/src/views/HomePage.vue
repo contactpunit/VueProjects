@@ -77,7 +77,7 @@ export default {
       this.tasks.splice(indexId, 1);
     },
     addTask() {
-      this.tasks.push({
+      this.$store.dispatch("addTask", {
         id: this.newId,
         title: this.newTask,
         done: false,
