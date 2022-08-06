@@ -41,6 +41,10 @@ export default new Vuex.Store({
       const indexId = state.tasks.findIndex((task) => task.id === id)
       state.tasks.splice(indexId, 1)
     },
+    selectChange(state, id) {
+      const selectedTask = state.tasks.find((task) => task.id === id)
+      selectedTask.done = !selectedTask.done
+    },
   },
   actions: {
     addTask(context, payload) {
@@ -48,6 +52,9 @@ export default new Vuex.Store({
     },
     deleteTask(context, id) {
       context.commit("deleteTask", id)
+    },
+    selectChange(context, id) {
+      context.commit("selectChange", id)
     },
   },
 })

@@ -15,7 +15,7 @@
       <div v-for="task in allTasks" :key="task.id">
         <v-list-item
           :class="{ 'blue lighten-4': task.done }"
-          @click="selectChange(task.id)"
+          @click="toggleDone(task.id)"
         >
           <template #default>
             <v-list-item-action>
@@ -68,9 +68,8 @@ export default {
     },
   },
   methods: {
-    selectChange(id) {
-      const selectedTask = this.allTasks.find((task) => task.id === id);
-      selectedTask.done = !selectedTask.done;
+    toggleDone(id) {
+      this.$store.dispatch("selectChange", id);
     },
     deleteTask(id) {
       this.$store.dispatch("deleteTask", id);
