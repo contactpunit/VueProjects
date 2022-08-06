@@ -6,6 +6,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     newId: 0,
+    snackbar: {
+      view: false,
+      text: "",
+    },
     tasks: [
       {
         id: 1,
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    getSnackbarValue(state) {
+      return state.snackbar
+    },
     getAllTasks(state) {
       return state.tasks
     },
@@ -55,10 +62,19 @@ export default new Vuex.Store({
     setNewIdValue(state, value) {
       state.newId = +value
     },
+    showSnackbar(state, text) {
+      state.snackbar.view = true
+      state.snackbar.text = text
+    },
+    resetSnackbar(state) {
+      state.snackbar.view = false
+      state.snackbar.text = ""
+    },
   },
   actions: {
     addTask(context, payload) {
       context.commit("addTask", payload)
+      context.commit("showSnackbar", "New Task Added")
     },
     deleteTask(context, id) {
       context.commit("deleteTask", id)
@@ -71,6 +87,9 @@ export default new Vuex.Store({
     },
     setNewIdValue(context, value) {
       context.commit("setNewIdValue", value)
+    },
+    showSnackbar(context) {
+      context.commit("showSnackbar", text)
     },
   },
 })

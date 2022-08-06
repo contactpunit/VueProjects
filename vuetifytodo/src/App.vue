@@ -54,11 +54,14 @@
 
     <v-main>
       <router-view></router-view>
+      <base-snackbar></base-snackbar>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import BaseSnackbar from "./components/UI/BaseSnackbar.vue";
+
 export default {
   name: "App",
 
@@ -69,5 +72,9 @@ export default {
       { title: "About", icon: "mdi-help-box", to: "/about" },
     ],
   }),
+
+  components: {
+    BaseSnackbar,
+  },
 };
 </script>
