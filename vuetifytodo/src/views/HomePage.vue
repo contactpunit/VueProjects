@@ -3,21 +3,20 @@
     <add-task></add-task>
 
     <list-tasks v-if="allTasks.length"></list-tasks>
-    <div v-else class="no-tasks">
-      <v-icon color="primary" size="100"> mdi-check </v-icon>
-      <div class="text-h5 primary--text">Add new tasks</div>
-    </div>
+    <no-tasks v-else></no-tasks>
   </div>
 </template>
 
 <script>
 import AddTask from "@/components/Todo/AddTask.vue";
 import ListTasks from "@/components/Todo/ListTasks.vue";
+import NoTasks from "@/components/Todo/NoTasks.vue";
 
 export default {
   components: {
     AddTask,
     ListTasks,
+    NoTasks,
   },
   created() {
     if (!this.allTasks.length) this.$store.dispatch("setNewIdValue", 1);
@@ -34,12 +33,3 @@ export default {
   },
 };
 </script>
-
-<style lang="sass" scoped>
-.no-tasks
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-  opacity: 0.5
-</style>
