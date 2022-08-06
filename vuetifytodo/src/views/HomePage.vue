@@ -17,6 +17,11 @@
               {{ task.title }}
             </v-list-item-title>
           </v-list-item-content>
+          <v-list-item-action>
+            <v-btn icon @click.stop="deleteTask(task.id)">
+              <v-icon color="primary">mdi-delete</v-icon>
+            </v-btn>
+          </v-list-item-action>
         </template>
       </v-list-item>
       <v-divider></v-divider>
@@ -58,6 +63,10 @@ export default {
     selectChange(id) {
       const selectedTask = this.tasks.find((task) => task.id === id);
       selectedTask.done = !selectedTask.done;
+    },
+    deleteTask(id) {
+      const indexId = this.tasks.findIndex((task) => task.id === id);
+      this.tasks.splice(indexId, 1);
     },
   },
 };
