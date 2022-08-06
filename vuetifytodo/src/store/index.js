@@ -37,10 +37,17 @@ export default new Vuex.Store({
     addTask(state, payload) {
       state.tasks.push(payload)
     },
+    deleteTask(state, id) {
+      const indexId = state.tasks.findIndex((task) => task.id === id)
+      state.tasks.splice(indexId, 1)
+    },
   },
   actions: {
     addTask(context, payload) {
       context.commit("addTask", payload)
+    },
+    deleteTask(context, id) {
+      context.commit("deleteTask", id)
     },
   },
 })

@@ -69,12 +69,11 @@ export default {
   },
   methods: {
     selectChange(id) {
-      const selectedTask = this.tasks.find((task) => task.id === id);
+      const selectedTask = this.allTasks.find((task) => task.id === id);
       selectedTask.done = !selectedTask.done;
     },
     deleteTask(id) {
-      const indexId = this.tasks.findIndex((task) => task.id === id);
-      this.tasks.splice(indexId, 1);
+      this.$store.dispatch("deleteTask", id);
     },
     addTask() {
       this.$store.dispatch("addTask", {
