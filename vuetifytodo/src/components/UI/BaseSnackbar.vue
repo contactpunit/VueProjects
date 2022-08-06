@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="snackbar">
+  <v-snackbar v-model="$store.state.snackbar.view">
     {{ text }}
 
     <template v-slot:action="{ attrs }">
@@ -13,9 +13,6 @@
 <script>
 export default {
   computed: {
-    snackbar() {
-      return this.$store.getters.getSnackbarValue.view;
-    },
     text() {
       return this.$store.getters.getSnackbarValue.text;
     },

@@ -74,10 +74,11 @@ export default new Vuex.Store({
   actions: {
     addTask(context, payload) {
       context.commit("addTask", payload)
-      context.commit("showSnackbar", "New Task Added")
+      context.commit("showSnackbar", "New Task Added!")
     },
     deleteTask(context, id) {
       context.commit("deleteTask", id)
+      context.commit("showSnackbar", "Task Deleted!")
     },
     selectChange(context, id) {
       context.commit("selectChange", id)
