@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    newId: 0,
     tasks: [
       {
         id: 1,
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     getAllTasks(state) {
       return state.tasks
     },
+    getNewId(state) {
+      return state.newId
+    },
   },
   mutations: {
     addTask(state, payload) {
@@ -45,6 +49,12 @@ export default new Vuex.Store({
       const selectedTask = state.tasks.find((task) => task.id === id)
       selectedTask.done = !selectedTask.done
     },
+    appendId(state) {
+      state.newId += 1
+    },
+    setNewIdValue(state, value) {
+      state.newId = +value
+    },
   },
   actions: {
     addTask(context, payload) {
@@ -55,6 +65,12 @@ export default new Vuex.Store({
     },
     selectChange(context, id) {
       context.commit("selectChange", id)
+    },
+    appendId(context) {
+      context.commit("appendId")
+    },
+    setNewIdValue(context, value) {
+      context.commit("setNewIdValue", value)
     },
   },
 })

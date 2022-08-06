@@ -1,16 +1,6 @@
 <template>
   <div class="home">
-    <v-text-field
-      v-model="newTask"
-      @click:append="addTask"
-      @keyup.enter="addTask"
-      class="pa-3"
-      outlined
-      hide-details
-      clearable
-      label="Add Task"
-      append-icon="mdi-plus"
-    ></v-text-field>
+    <add-task></add-task>
     <v-list flat class="pt-0" v-if="allTasks.length">
       <div v-for="task in allTasks" :key="task.id">
         <v-list-item
@@ -48,19 +38,19 @@
 </template>
 
 <script>
+import AddTask from "@/components/Todo/AddTask.vue";
+
 export default {
+  components: {
+    AddTask,
+  },
   created() {
-    if (!this.allTasks.length) this.newId = 1;
+    if (!this.allTasks.length) this.$store.dispatch("setNewIdValue", 1);
     else {
       const sorted = this.allTasks.map((task) => task.id).sort((a, b) => b - a);
-      this.newId = +sorted[0] + 1;
+      const newValue = +sorted[0] + 1;
+      this.$store.dispatch("setNewIdValue", newValue);
     }
-  },
-  data() {
-    return {
-      newTask: null,
-      newId: 0,
-    };
   },
   computed: {
     allTasks() {
@@ -73,15 +63,6 @@ export default {
     },
     deleteTask(id) {
       this.$store.dispatch("deleteTask", id);
-    },
-    addTask() {
-      this.$store.dispatch("addTask", {
-        id: this.newId,
-        title: this.newTask,
-        done: false,
-      });
-      this.newId += 1;
-      this.newTask = null;
     },
   },
 };
