@@ -24,11 +24,17 @@
       </template>
     </v-list-item>
     <v-divider></v-divider>
+    <base-dialog></base-dialog>
   </div>
 </template>
 
 <script>
+import BaseDialog from "../UI/BaseDialog.vue";
+
 export default {
+  components: {
+    BaseDialog,
+  },
   props: ["task"],
   methods: {
     toggleDone(id) {

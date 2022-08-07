@@ -3,9 +3,7 @@
     {{ text }}
 
     <template v-slot:action="{ attrs }">
-      <v-btn color="pink" text v-bind="attrs" @click="resetSnackbar">
-        Close
-      </v-btn>
+      <v-btn text v-bind="attrs" @click="resetSnackbar"> Close </v-btn>
     </template>
   </v-snackbar>
 </template>
