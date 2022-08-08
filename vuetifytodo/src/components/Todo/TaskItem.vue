@@ -17,37 +17,25 @@
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn icon @click.stop="enableDialog(task.id)">
+          <!-- <v-btn icon @click.stop="enableDialog(task.id)">
             <v-icon color="primary">mdi-delete</v-icon>
-          </v-btn>
+          </v-btn> -->
+          <base-menu :task="task"></base-menu>
         </v-list-item-action>
       </template>
     </v-list-item>
     <v-divider></v-divider>
-    <base-dialog
-      :dialogProp="dialogProp"
-      v-if="dialogProp.dialogShow"
-      @cancel-dialog="dialogProp.dialogShow = false"
-    ></base-dialog>
   </div>
 </template>
 
 <script>
 import BaseDialog from "../UI/BaseDialog.vue";
+import BaseMenu from "../UI/BaseMenu.vue";
 
 export default {
-  data() {
-    return {
-      dialogProp: {
-        dialogTitle: "",
-        dialogText: "",
-        dialogShow: false,
-        dialogTaskId: "",
-      },
-    };
-  },
   components: {
     BaseDialog,
+    BaseMenu,
   },
   provide() {
     return {
@@ -57,20 +45,9 @@ export default {
     };
   },
   props: ["task"],
-  computed: {
-    showDialog() {
-      return this.dialogProp.dialogShow;
-    },
-  },
   methods: {
     toggleDone(id) {
       this.$store.dispatch("selectChange", id);
-    },
-    enableDialog(id) {
-      this.dialogProp.dialogShow = true;
-      this.dialogProp.dialogTitle = "Delete Task";
-      this.dialogProp.dialogText = "Do you want to delete the task ?";
-      this.dialogProp.dialogTaskId = id;
     },
   },
 };
