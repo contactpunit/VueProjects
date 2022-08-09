@@ -19,15 +19,23 @@ export default {
       newTask: "",
     };
   },
+  computed: {
+    isValid() {
+      if (this.newTask === "" || this.newTask === undefined) return false;
+      else return true;
+    },
+  },
   methods: {
     addTask() {
-      this.$store.dispatch("addTask", {
-        id: this.$store.getters.getNewId,
-        title: this.newTask,
-        done: false,
-      });
-      this.$store.dispatch("appendId");
-      this.newTask = null;
+      if (this.isValid) {
+        this.$store.dispatch("addTask", {
+          id: this.$store.getters.getNewId,
+          title: this.newTask,
+          done: false,
+        });
+        this.$store.dispatch("appendId");
+        this.newTask = null;
+      }
     },
   },
 };
