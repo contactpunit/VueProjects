@@ -70,8 +70,16 @@ export default new Vuex.Store({
       state.snackbar.view = false
       state.snackbar.text = ""
     },
+    editTask(state, payload) {
+      // const task = state.tasks.find((task) => task.id === payload.id)
+      const id = payload.id
+      state.tasks[id].title = payload.title
+    },
   },
   actions: {
+    editTitle(context, payload) {
+      context.commit("editTask", payload)
+    },
     addTask(context, payload) {
       context.commit("addTask", payload)
       context.commit("showSnackbar", "New Task Added!")

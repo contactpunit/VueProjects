@@ -24,6 +24,7 @@
       :dialogProp="dialogProp"
       v-if="dialogProp.dialogShow"
       @cancel-dialog="dialogProp.dialogShow = false"
+      :task="task"
     ></base-dialog>
   </div>
 </template>
@@ -43,20 +44,21 @@ export default {
         dialogText: "",
         dialogShow: false,
         dialogTaskId: "",
+        type: "",
       },
       items: [
         {
           title: "Delete",
           icon: "mdi-delete",
           click: () => {
-            this.enableDialog(this.task.id);
+            this.enableDeleteDialog(this.task.id);
           },
         },
         {
           title: "Edit",
           icon: "mdi-pencil",
-          click() {
-            console.log("edit");
+          click: () => {
+            this.enableEditDialog(this.task.id);
           },
         },
         {
@@ -70,10 +72,18 @@ export default {
     };
   },
   methods: {
-    enableDialog(id) {
+    enableDeleteDialog(id) {
       this.dialogProp.dialogShow = true;
       this.dialogProp.dialogTitle = "Delete Task";
       this.dialogProp.dialogText = "Do you want to delete the task ?";
+      this.dialogProp.type = "confirm";
+      this.dialogProp.dialogTaskId = id;
+    },
+    enableEditDialog(id) {
+      this.dialogProp.dialogShow = true;
+      this.dialogProp.dialogTitle = "Edit Task";
+      this.dialogProp.dialogText = "Do you want to edit this task ?";
+      this.dialogProp.type = "input";
       this.dialogProp.dialogTaskId = id;
     },
   },
