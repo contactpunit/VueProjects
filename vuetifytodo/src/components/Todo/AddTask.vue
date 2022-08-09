@@ -1,7 +1,6 @@
 <template>
   <v-text-field
     v-model="newTask"
-    @click:append="addTask"
     @keyup.enter="addTask"
     class="pa-3"
     outlined
@@ -9,7 +8,13 @@
     clearable
     label="Add Task"
     append-icon="mdi-plus"
-  ></v-text-field>
+  >
+    <template v-slot:append>
+      <v-icon @click="addTask" color="primary" :disabled="!newTask"
+        >mdi-plus</v-icon
+      >
+    </template>
+  </v-text-field>
 </template>
 
 <script>
@@ -21,7 +26,12 @@ export default {
   },
   computed: {
     isValid() {
-      if (this.newTask === "" || this.newTask === undefined) return false;
+      if (
+        this.newTask === "" ||
+        this.newTask === undefined ||
+        this.newTask === null
+      )
+        return false;
       else return true;
     },
   },
