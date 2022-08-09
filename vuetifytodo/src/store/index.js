@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    newId: 0,
+    newId: 1,
     snackbar: {
       view: false,
       text: "",
@@ -71,9 +71,8 @@ export default new Vuex.Store({
       state.snackbar.text = ""
     },
     editTask(state, payload) {
-      // const task = state.tasks.find((task) => task.id === payload.id)
-      const id = payload.id
-      state.tasks[id].title = payload.title
+      const task = state.tasks.find((task) => task.id === payload.id)
+      state.tasks[task.id - 1].title = payload.title
     },
   },
   actions: {

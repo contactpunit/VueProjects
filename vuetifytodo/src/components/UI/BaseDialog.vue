@@ -9,7 +9,10 @@
       }}</v-card-text>
       <v-card-text v-if="dialogProp.type === 'input'">
         {{ dialogProp.dialogText }}
-        <v-text-field v-model="taskTitle"></v-text-field>
+        <v-text-field
+          v-model="taskTitle"
+          @keyup.enter="saveTask"
+        ></v-text-field>
       </v-card-text>
       <v-card-actions v-if="dialogProp.type === 'confirm'">
         <v-spacer></v-spacer>
@@ -53,6 +56,7 @@ export default {
         title: this.taskTitle,
         id: this.task.id,
       });
+      this.$emit("cancel-dialog");
     },
   },
 };
