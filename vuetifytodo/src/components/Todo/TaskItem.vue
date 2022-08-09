@@ -19,7 +19,7 @@
         <v-list-item-action v-if="task.dueDate">
           <v-list-item-action-text>
             <v-icon small>mdi-calendar</v-icon>
-            {{ task.dueDate }}
+            {{ task.dueDate | niceDate }}
           </v-list-item-action-text>
         </v-list-item-action>
         <v-list-item-action>
@@ -34,8 +34,14 @@
 <script>
 import BaseDialog from "../UI/BaseDialog.vue";
 import BaseMenu from "../UI/BaseMenu.vue";
+import { format } from "date-fns";
 
 export default {
+  filters: {
+    niceDate(value) {
+      return format(new Date(value), "MMM do");
+    },
+  },
   components: {
     BaseDialog,
     BaseMenu,
