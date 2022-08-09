@@ -15,21 +15,25 @@ export default new Vuex.Store({
         id: 1,
         title: "Learn Vue!",
         done: false,
+        dueDate: "2022-08-08",
       },
       {
         id: 2,
         title: "Master Vue!",
         done: false,
+        dueDate: "2022-08-08",
       },
       {
         id: 3,
         title: "Learn Vuetify!",
         done: false,
+        dueDate: "2022-08-08",
       },
       {
         id: 4,
         title: "Master Nodejs",
         done: false,
+        dueDate: null,
       },
     ],
   },
@@ -78,6 +82,7 @@ export default new Vuex.Store({
   actions: {
     editTitle(context, payload) {
       context.commit("editTask", payload)
+      context.commit("showSnackbar", "Task Edited!")
     },
     addTask(context, payload) {
       context.commit("addTask", payload)
