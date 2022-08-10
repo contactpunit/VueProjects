@@ -48,36 +48,30 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog
+    <duedate-dialog
       v-if="dialogProp.type === 'dateselect'"
-      ref="dialog"
-      :value="true"
-      :return-value.sync="date"
-      persistent
-      width="290px"
-    >
-      <v-date-picker v-model="date" scrollable>
-        <v-spacer></v-spacer>
-        <v-btn text color="primary" @click="cancelDialog"> Cancel </v-btn>
-        <v-btn text color="primary" @click="saveDate(date)"> OK </v-btn>
-      </v-date-picker>
-    </v-dialog>
+      :task="task"
+      :cancelDialog="cancelDialog"
+      @cancel-dialog="$emit('cancel-dialog')"
+    ></duedate-dialog>
   </div>
 </template>
 
 <script>
+import DuedateDialog from "./DuedateDialog.vue";
 export default {
+  components: {
+    DuedateDialog,
+  },
   data() {
     return {
       taskTitle: "",
-      date: null,
     };
   },
   props: ["dialogProp", "task"],
   inject: ["deleteTask"],
   mounted() {
     this.taskTitle = this.task.title;
-    this.date = this.task.dueDate;
   },
   computed: {
     isNotValid() {
@@ -98,10 +92,6 @@ export default {
         });
         this.$emit("cancel-dialog");
       }
-    },
-    saveDate(date) {
-      this.$store.dispatch("saveDate", { date, id: this.task.id });
-      this.$emit("cancel-dialog");
     },
   },
 };
