@@ -1,19 +1,20 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" :mobile-breakpoint="768" app>
       <v-img
         lazy-src="https://picsum.photos/id/11/10/6"
         height="160"
-        class="pa-4"
+        class="pa-4 pt-7"
         src="tree.jpg"
         gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
       >
-        <v-avatar size="70">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="John"
-          /> </v-avatar
-      ></v-img>
+        <v-avatar size="70" class="mb-2">
+          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+        </v-avatar>
+        <div class="white--text text-subtitle-1 font-weight-bold">
+          Punit Jain
+        </div>
+      </v-img>
 
       <v-divider></v-divider>
 
@@ -40,7 +41,7 @@
         ></v-img>
       </template>
 
-      <v-container class="pl-0">
+      <v-container class="pl-0 header-container">
         <v-row>
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-spacer></v-spacer>
@@ -85,3 +86,8 @@ export default {
   },
 };
 </script>
+
+<style lang="sass">
+.header-container
+  max-width: none !important
+</style>
