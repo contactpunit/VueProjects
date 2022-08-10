@@ -21,13 +21,13 @@ export default new Vuex.Store({
         id: 2,
         title: "Master Vue!",
         done: false,
-        dueDate: "2022-08-08",
+        dueDate: "2022-08-04",
       },
       {
         id: 3,
         title: "Learn Vuetify!",
         done: false,
-        dueDate: "2022-08-08",
+        dueDate: "2022-10-03",
       },
       {
         id: 4,
@@ -78,6 +78,12 @@ export default new Vuex.Store({
       const task = state.tasks.find((task) => task.id === payload.id)
       state.tasks[task.id - 1].title = payload.title
     },
+    saveDate(state, payload) {
+      const task = state.tasks.find((t) => t.id === payload.id)
+      if (task) {
+        task.dueDate = payload.date
+      }
+    },
   },
   actions: {
     editTitle(context, payload) {
@@ -103,6 +109,9 @@ export default new Vuex.Store({
     },
     showSnackbar(context) {
       context.commit("showSnackbar", text)
+    },
+    saveDate(context, payload) {
+      context.commit("saveDate", payload)
     },
   },
 })

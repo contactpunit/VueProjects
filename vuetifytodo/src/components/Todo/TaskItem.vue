@@ -34,6 +34,7 @@
 <script>
 import BaseDialog from "../UI/BaseDialog.vue";
 import BaseMenu from "../UI/BaseMenu.vue";
+
 import { format } from "date-fns";
 
 export default {
