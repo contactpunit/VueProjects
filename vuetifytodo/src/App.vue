@@ -39,17 +39,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <search-item></search-item>
     </v-app-bar>
 
     <v-main>
@@ -61,6 +51,7 @@
 
 <script>
 import BaseSnackbar from "./components/UI/BaseSnackbar.vue";
+import SearchItem from "./tools/SearchItem.vue";
 
 export default {
   name: "App",
@@ -75,6 +66,7 @@ export default {
 
   components: {
     BaseSnackbar,
+    SearchItem,
   },
 };
 </script>
