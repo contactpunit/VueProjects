@@ -1,10 +1,11 @@
 <template>
   <v-text-field
-    v-model="searchText"
+    :value="searchValue"
+    @input="setSearchText($event)"
     @focus="expand"
     @blur="closed = true"
     class="expanding-search"
-    :class="{ closed: closed && !searchText }"
+    :class="{ closed: closed && !searchValue }"
     placeholder="Search"
     filled
     dense
@@ -18,10 +19,17 @@ export default {
   data() {
     return {
       closed: true,
-      searchText: "",
     };
   },
+  computed: {
+    searchValue() {
+      return this.$store.state.searchText;
+    },
+  },
   methods: {
+    setSearchText(event) {
+      this.$store.dispatch("setSearchText", event);
+    },
     expand() {
       this.closed = false;
     },
@@ -32,13 +40,13 @@ export default {
 
 <style lang="sass">
 .expanding-search
-    transition: max-width 0.3s
-    .v-input__slot
-        cursor: pointer !important
-        &:before, &:after
-            border-color: transparent !important
+  transition: max-width 0.3s
+  .v-input__slot
+    cursor: pointer !important
+    &:before, &:after
+      border-color: transparent !important
     &.closed
-        max-width: 45px
-        .v-input__slot
-            background: transparent !important
+      max-width: 45px
+      .v-input__slot
+        background: transparent !important
 </style>

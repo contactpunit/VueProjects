@@ -6,6 +6,7 @@
 
 <script>
 import TaskItem from "./TaskItem.vue";
+
 export default {
   components: {
     TaskItem,

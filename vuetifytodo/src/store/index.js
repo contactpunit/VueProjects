@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    searchText: null,
     newId: 1,
     snackbar: {
       view: false,
@@ -42,7 +43,10 @@ export default new Vuex.Store({
       return state.snackbar
     },
     getAllTasks(state) {
-      return state.tasks
+      if (!state.searchText) {
+        return state.tasks
+      }
+      return state.tasks.filter((task) => task.title.includes(state.searchText))
     },
     getNewId(state) {
       return state.newId
@@ -84,8 +88,14 @@ export default new Vuex.Store({
         task.dueDate = payload.date
       }
     },
+    setSearchText(state, payload) {
+      state.searchText = payload
+    },
   },
   actions: {
+    setSearchText(context, payload) {
+      context.commit("setSearchText", payload)
+    },
     editTitle(context, payload) {
       context.commit("editTask", payload)
       context.commit("showSnackbar", "Task Edited!")
