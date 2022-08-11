@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     searchText: null,
     newId: 1,
+    sorting: false,
     appTitle: process.env.VUE_APP_TITLE,
     snackbar: {
       view: false,
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    doSort(state) {
+      return state.sorting
+    },
     getAppTitle(state) {
       return state.appTitle
     },
@@ -57,6 +61,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    toggleSort(state) {
+      state.sorting = !state.sorting
+    },
     addTask(state, payload) {
       state.tasks.push(payload)
     },
@@ -97,6 +104,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    toggleSort(context) {
+      context.commit("toggleSort")
+    },
     setSearchText(context, payload) {
       context.commit("setSearchText", payload)
     },

@@ -25,6 +25,11 @@
         <v-list-item-action>
           <base-menu :task="task"></base-menu>
         </v-list-item-action>
+        <v-list-item-action v-if="$store.getters.doSort">
+          <v-btn icon color="primary">
+            <v-icon>mdi-drag-horizontal-variant</v-icon>
+          </v-btn>
+        </v-list-item-action>
       </template>
     </v-list-item>
     <v-divider></v-divider>

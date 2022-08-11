@@ -71,6 +71,13 @@ export default {
             this.enableDueDateDialog(this.task.id);
           },
         },
+        {
+          title: "Sort",
+          icon: "mdi-drag-horizontal-variant",
+          click: () => {
+            this.$store.dispatch("toggleSort");
+          },
+        },
       ],
     };
   },
