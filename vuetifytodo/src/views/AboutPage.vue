@@ -1,6 +1,6 @@
 <template>
   <div class="about pa-6">
-    <h1>About Vuetify Todo</h1>
+    <h1>About {{ $store.getters.getAppTitle }}</h1>
     <v-divider></v-divider>
     <p>
       It is a long established fact that a reader will be distracted by the

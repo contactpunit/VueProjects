@@ -48,7 +48,9 @@
           <search-item></search-item>
         </v-row>
         <v-row>
-          <v-app-bar-title class="text-h6">Vuetify Todo List</v-app-bar-title>
+          <v-app-bar-title class="text-h6">{{
+            $store.getters.getAppTitle
+          }}</v-app-bar-title>
         </v-row>
         <v-row>
           <live-datetime></live-datetime>

@@ -1,6 +1,7 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import HomeView from "../views/HomePage.vue"
+import store from "../store/index.js"
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `Vuetify Project - ${to.name}`
+  document.title = `${store.getters.getAppTitle} - ${to.name}`
   next()
 })
 

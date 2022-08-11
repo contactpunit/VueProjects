@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     searchText: null,
     newId: 1,
+    appTitle: process.env.VUE_APP_TITLE,
     snackbar: {
       view: false,
       text: "",
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    getAppTitle(state) {
+      return state.appTitle
+    },
     getSnackbarValue(state) {
       return state.snackbar
     },
