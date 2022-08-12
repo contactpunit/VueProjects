@@ -21,12 +21,15 @@ export default {
     NoTasks,
     BasesortingButton,
   },
-  created() {
-    if (!this.allTasks.length) this.$store.dispatch("setNewIdValue", 1);
-    else {
-      const sorted = this.allTasks.map((task) => task.id).sort((a, b) => b - a);
+  async created() {
+    await this.$store.dispatch("setDbTasks");
+    const tasks = await this.allTasks;
+    if (!tasks.length) {
+      await this.$store.dispatch("setNewIdValue", 1);
+    } else {
+      const sorted = tasks.map((task) => task.id).sort((a, b) => b - a);
       const newValue = +sorted[0] + 1;
-      this.$store.dispatch("setNewIdValue", newValue);
+      await this.$store.dispatch("setNewIdValue", newValue);
     }
   },
   computed: {

@@ -64,6 +64,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setStoreTasks(state, payload) {
+      state.tasks = payload
+    },
     toggleSort(state) {
       state.sorting = !state.sorting
     },
@@ -107,6 +110,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async setDbTasks(context) {
+      const allTasks = await db.collection("tasks").get()
+      await context.commit("setStoreTasks", allTasks)
+    },
     toggleSort(context) {
       context.commit("toggleSort")
     },
@@ -136,8 +143,8 @@ export default new Vuex.Store({
     appendId(context) {
       context.commit("appendId")
     },
-    setNewIdValue(context, value) {
-      context.commit("setNewIdValue", value)
+    async setNewIdValue(context, value) {
+      await context.commit("setNewIdValue", value)
     },
     showSnackbar(context) {
       context.commit("showSnackbar", text)

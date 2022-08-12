@@ -80,7 +80,6 @@ export default {
       { title: "About", icon: "mdi-help-box", to: "/about" },
     ],
   }),
-
   components: {
     BaseSnackbar,
     SearchItem,
