@@ -16,32 +16,7 @@ export default new Vuex.Store({
       view: false,
       text: "",
     },
-    tasks: [
-      // {
-      //   id: 1,
-      //   title: "Learn Vue!",
-      //   done: false,
-      //   dueDate: "2022-08-08",
-      // },
-      // {
-      //   id: 2,
-      //   title: "Master Vue!",
-      //   done: false,
-      //   dueDate: "2022-08-04",
-      // },
-      // {
-      //   id: 3,
-      //   title: "Learn Vuetify!",
-      //   done: false,
-      //   dueDate: "2022-10-03",
-      // },
-      // {
-      //   id: 4,
-      //   title: "Master Nodejs",
-      //   done: false,
-      //   dueDate: null,
-      // },
-    ],
+    tasks: [],
   },
   getters: {
     doSort(state) {
@@ -137,7 +112,12 @@ export default new Vuex.Store({
       context.commit("deleteTask", id)
       context.commit("showSnackbar", "Task Deleted!")
     },
-    selectChange(context, id) {
+    async selectChange(context, id) {
+      const reqDocument = await db.collection("tasks").doc({ id }).get()
+      await db
+        .collection("tasks")
+        .doc({ id })
+        .update({ done: !reqDocument.done })
       context.commit("selectChange", id)
     },
     appendId(context) {
