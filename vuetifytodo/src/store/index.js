@@ -1,5 +1,8 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import localbase from "localbase"
+
+let db = new localbase("db")
 
 Vue.use(Vuex)
 
@@ -14,30 +17,30 @@ export default new Vuex.Store({
       text: "",
     },
     tasks: [
-      {
-        id: 1,
-        title: "Learn Vue!",
-        done: false,
-        dueDate: "2022-08-08",
-      },
-      {
-        id: 2,
-        title: "Master Vue!",
-        done: false,
-        dueDate: "2022-08-04",
-      },
-      {
-        id: 3,
-        title: "Learn Vuetify!",
-        done: false,
-        dueDate: "2022-10-03",
-      },
-      {
-        id: 4,
-        title: "Master Nodejs",
-        done: false,
-        dueDate: null,
-      },
+      // {
+      //   id: 1,
+      //   title: "Learn Vue!",
+      //   done: false,
+      //   dueDate: "2022-08-08",
+      // },
+      // {
+      //   id: 2,
+      //   title: "Master Vue!",
+      //   done: false,
+      //   dueDate: "2022-08-04",
+      // },
+      // {
+      //   id: 3,
+      //   title: "Learn Vuetify!",
+      //   done: false,
+      //   dueDate: "2022-10-03",
+      // },
+      // {
+      //   id: 4,
+      //   title: "Master Nodejs",
+      //   done: false,
+      //   dueDate: null,
+      // },
     ],
   },
   getters: {
@@ -114,9 +117,14 @@ export default new Vuex.Store({
       context.commit("editTask", payload)
       context.commit("showSnackbar", "Task Edited!")
     },
-    addTask(context, payload) {
-      context.commit("addTask", payload)
-      context.commit("showSnackbar", "New Task Added!")
+    async addTask(context, payload) {
+      try {
+        context.commit("addTask", payload)
+        await db.collection("tasks").add(payload)
+        context.commit("showSnackbar", "New Task Added!")
+      } catch (err) {
+        context.commit("showSnackbar", `Error: ${err.message}`)
+      }
     },
     deleteTask(context, id) {
       context.commit("deleteTask", id)

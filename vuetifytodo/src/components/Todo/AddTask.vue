@@ -36,13 +36,15 @@ export default {
     },
   },
   methods: {
-    addTask() {
+    async addTask() {
       if (this.isValid) {
-        this.$store.dispatch("addTask", {
+        const task = {
           id: this.$store.getters.getNewId,
           title: this.newTask,
           done: false,
-        });
+          dueDate: null,
+        };
+        await this.$store.dispatch("addTask", task);
         this.$store.dispatch("appendId");
         this.newTask = null;
       }
