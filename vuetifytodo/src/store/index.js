@@ -133,8 +133,12 @@ export default new Vuex.Store({
     showSnackbar(context) {
       context.commit("showSnackbar", text)
     },
-    saveDate(context, payload) {
-      context.commit("saveDate", payload)
+    async saveDate(context, payload) {
+      await db
+        .collection("tasks")
+        .doc({ id: payload.id })
+        .update({ dueDate: payload.date })
+      await context.commit("saveDate", payload)
     },
   },
 })
