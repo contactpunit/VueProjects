@@ -96,12 +96,9 @@ export default new Vuex.Store({
       context.commit("setSearchText", payload)
     },
     async editTitle(context, payload) {
-      const reqDoc = await context.state.tasks.find(
-        (tsk) => tsk.id === payload.id
-      )
       await db
         .collection("tasks")
-        .doc({ id: reqDoc.id })
+        .doc({ id: payload.id })
         .update({ title: payload.title })
       context.commit("editTask", payload)
       context.commit("showSnackbar", "Task Edited!")
