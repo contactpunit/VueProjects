@@ -112,8 +112,9 @@ export default new Vuex.Store({
         context.commit("showSnackbar", `Error: ${err.message}`)
       }
     },
-    deleteTask(context, id) {
-      context.commit("deleteTask", id)
+    async deleteTask(context, id) {
+      await db.collection("tasks").doc({ id }).delete()
+      await context.commit("deleteTask", id)
       context.commit("showSnackbar", "Task Deleted!")
     },
     async selectChange(context, id) {
