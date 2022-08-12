@@ -84,9 +84,9 @@ export default {
     cancelDialog() {
       this.$emit("cancel-dialog");
     },
-    saveTask() {
+    async saveTask() {
       if (!this.isNotValid) {
-        this.$store.dispatch("editTitle", {
+        await this.$store.dispatch("editTitle", {
           title: this.taskTitle,
           id: this.task.id,
         });
