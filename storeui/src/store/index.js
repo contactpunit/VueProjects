@@ -5,6 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    snackbar: {
+      show: false,
+      variant: "success",
+      message: "Success! Item added to the cart.",
+    },
+    cart: [],
     products: [
       {
         image:
@@ -45,6 +51,20 @@ export default new Vuex.Store({
     ],
   },
   getters: {},
-  mutations: {},
-  actions: {},
+  mutations: {
+    updateCart() {
+      //
+    },
+    showSnackbar(state) {
+      state.snackbar.show = !state.snackbar.show
+    },
+  },
+  actions: {
+    updateCart(context, payload) {
+      context.commit("updateCart", payload)
+    },
+    showSnackbar(context) {
+      context.commit("showSnackbar")
+    },
+  },
 })
