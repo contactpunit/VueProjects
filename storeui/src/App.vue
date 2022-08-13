@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TopNav from "./components/TopNav.vue";
+import TopNav from "./views/TopNav.vue";
 
 export default {
   components: {

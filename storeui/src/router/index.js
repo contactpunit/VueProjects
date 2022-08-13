@@ -1,15 +1,16 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import HomePage from "../components/HomePage.vue"
-import StoreList from "../components/StoreList.vue"
-import CartList from "../components/CartList.vue"
+import HomePage from "../views/HomePage.vue"
+import StoreList from "../views/StoreList.vue"
+import CartList from "../views/CartList.vue"
 
 Vue.use(VueRouter)
 
 const routes = [
+  { path: "/", redirect: "/home" },
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: HomePage,
   },
