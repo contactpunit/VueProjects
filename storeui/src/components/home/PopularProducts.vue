@@ -14,23 +14,31 @@
           <v-col
             sm="6"
             md="4"
-            v-for="product in $store.state.products"
+            v-for="product in allProducts"
             :key="product.name"
           >
-            <v-card outlined>
-              <v-img :src="product.image" height="200px" />
-              <v-card-title>{{ product.name }}</v-card-title>
-              <v-card-subtitle>${{ product.price }}</v-card-subtitle>
-              <v-card-actions>
-                <v-btn color="success" outlined>
-                  <v-icon small left>mdi-plus-thick</v-icon>
-                  Add to Cart
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+            <vertical-card :product="product"></vertical-card>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<script>
+import VerticalCard from "../cards/VerticalCard.vue";
+
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    VerticalCard,
+  },
+  computed: {
+    allProducts() {
+      return this.$store.state.products;
+    },
+  },
+};
+</script>
