@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col sm="3" offset-lg="1">
+      <v-col md="3" offset-lg="1">
         <sidebar-display></sidebar-display>
       </v-col>
-      <v-col sm="9" lg="7">
+      <v-col md="9" lg="7">
         <product-display></product-display>
       </v-col>
     </v-row>
