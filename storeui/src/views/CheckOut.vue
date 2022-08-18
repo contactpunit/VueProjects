@@ -15,17 +15,19 @@
               :contact="contact"
               :rules="rules"
               :next="next"
+              @update-contact="populateFields($event)"
             ></contact-info>
             <shipping-info
               :contact="contact"
               :rules="rules"
               :next="next"
               :prev="prev"
+              @update-contact="populateFields($event)"
             ></shipping-info>
             <review-order
               :contact="contact"
               :rules="rules"
-              :next="next"
+              :prev="prev"
             ></review-order>
           </v-stepper-items>
         </v-stepper>
@@ -66,6 +68,14 @@ export default {
     };
   },
   methods: {
+    populateFields(data) {
+      if (data.name) this.contact.name = data.name;
+      if (data.email) this.contact.email = data.email;
+      if (data.phone) this.contact.phone = data.phone;
+      if (data.state) this.contact.state = data.state;
+      if (data.zip) this.contact.zip = data.zip;
+      if (data.street) this.contact.street = data.street;
+    },
     next() {
       this.step += 1;
     },

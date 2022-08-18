@@ -19,7 +19,7 @@
       :rules="[rules.required, rules.zip]"
     ></v-text-field>
 
-    <v-btn color="primary" @click="next">Next</v-btn>
+    <v-btn color="primary" @click="updateContact">Next</v-btn>
     <v-btn @click="prev">Back</v-btn>
   </v-stepper-content>
 </template>
@@ -32,6 +32,16 @@ export default {
       zip: "",
       street: "",
     };
+  },
+  methods: {
+    updateContact() {
+      this.$emit("update-contact", {
+        state: this.state,
+        zip: this.zip,
+        street: this.street,
+      });
+      this.next();
+    },
   },
   props: ["contact", "rules", "next", "prev"],
 };

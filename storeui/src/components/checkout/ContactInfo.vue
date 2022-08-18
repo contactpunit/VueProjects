@@ -1,24 +1,24 @@
 <template>
   <v-stepper-content step="1">
     <v-text-field
-      :name="contact.name"
+      v-model="name"
       label="Name"
       required
       :rules="[rules.required]"
     ></v-text-field>
     <v-text-field
-      :name="contact.email"
+      v-model="email"
       label="Email"
       required
       :rules="[rules.required, rules.email]"
     ></v-text-field>
     <v-text-field
-      :name="contact.phone"
+      v-model="phone"
       label="Phone"
       required
       :rules="[rules.required, rules.phone]"
     ></v-text-field>
-    <v-btn color="primary" @click="next">Continue</v-btn>
+    <v-btn color="primary" @click="updateContact">Continue</v-btn>
     <v-btn text @click="$router.replace('/cart')">Cancel</v-btn>
   </v-stepper-content>
 </template>
@@ -33,5 +33,15 @@ export default {
     };
   },
   props: ["contact", "rules", "next"],
+  methods: {
+    updateContact() {
+      this.$emit("update-contact", {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+      });
+      this.next();
+    },
+  },
 };
 </script>
