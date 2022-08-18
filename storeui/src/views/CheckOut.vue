@@ -20,6 +20,7 @@
               :contact="contact"
               :rules="rules"
               :next="next"
+              :prev="prev"
             ></shipping-info>
             <review-order
               :contact="contact"
@@ -45,6 +46,9 @@ export default {
         name: "",
         email: "",
         phone: "",
+        state: "",
+        zip: "",
+        street: "",
       },
       rules: {
         required: (value) => !!value || "Required.",
@@ -64,6 +68,9 @@ export default {
   methods: {
     next() {
       this.step += 1;
+    },
+    prev() {
+      this.step -= 1;
     },
   },
   components: {
