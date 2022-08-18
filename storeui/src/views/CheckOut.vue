@@ -11,9 +11,21 @@
             <v-stepper-step step="3" :complete="step > 3"></v-stepper-step>
           </v-stepper-header>
           <v-stepper-items>
-            <v-stepper-content step="1"> Step 1 </v-stepper-content>
-            <v-stepper-content step="2"> Step 2 </v-stepper-content>
-            <v-stepper-content step="3"> Step 3 </v-stepper-content>
+            <contact-info
+              :contact="contact"
+              :rules="rules"
+              :next="next"
+            ></contact-info>
+            <shipping-info
+              :contact="contact"
+              :rules="rules"
+              :next="next"
+            ></shipping-info>
+            <review-order
+              :contact="contact"
+              :rules="rules"
+              :next="next"
+            ></review-order>
           </v-stepper-items>
         </v-stepper>
       </v-col>
@@ -22,11 +34,42 @@
 </template>
 
 <script>
+import ContactInfo from "@/components/checkout/ContactInfo.vue";
+import ShippingInfo from "@/components/checkout/ShippingInfo.vue";
+import ReviewOrder from "@/components/checkout/ReviewOrder.vue";
 export default {
   data() {
     return {
-      step: 2,
+      step: 1,
+      contact: {
+        name: "",
+        email: "",
+        phone: "",
+      },
+      rules: {
+        required: (value) => !!value || "Required.",
+        zip: (value) => value.length == 5 || "Must be five characters",
+        email: (value) => {
+          const pattern =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        },
+        phone: (value) => {
+          const pattern = /\d{10}/;
+          return pattern.test(value) || "Invalid phone number.";
+        },
+      },
     };
+  },
+  methods: {
+    next() {
+      this.step += 1;
+    },
+  },
+  components: {
+    ContactInfo,
+    ShippingInfo,
+    ReviewOrder,
   },
 };
 </script>
