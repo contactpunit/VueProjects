@@ -14,7 +14,7 @@
 export default {
   methods: {
     checkout() {
-      console.log("checkout iitem");
+      this.$router.push({ name: "checkout" });
     },
   },
 };
