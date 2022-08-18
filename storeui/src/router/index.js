@@ -5,6 +5,7 @@ import HomePage from "../views/HomePage.vue"
 import StoreList from "../views/StoreList.vue"
 import CartList from "../views/CartList.vue"
 import CheckOut from "../views/CheckOut.vue"
+import ThankYou from "../views/ThankYou.vue"
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: CheckOut,
+  },
+  {
+    path: "/thankyou",
+    name: "thankyou",
+    component: ThankYou,
   },
 ]
 

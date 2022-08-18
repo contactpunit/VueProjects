@@ -11,7 +11,7 @@
       </v-list-item-group>
     </v-list>
 
-    <v-btn color="primary">Submit Order</v-btn>
+    <v-btn color="primary" @click="submitOrder">Submit Order</v-btn>
     <v-btn text @click="prev">Back</v-btn>
   </v-stepper-content>
 </template>
@@ -19,5 +19,10 @@
 <script>
 export default {
   props: ["contact", "rules", "prev"],
+  methods: {
+    submitOrder() {
+      this.$router.replace("/thankyou");
+    },
+  },
 };
 </script>
