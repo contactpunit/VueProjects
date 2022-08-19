@@ -8,6 +8,7 @@
   </div>
 </template>
 
+<!--
 <script>
 export default {
   data() {
@@ -22,6 +23,26 @@ export default {
     increment() {
       this.counter += 1;
     },
+  },
+};
+</script>
+-->
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const counter = ref(0);
+
+    function increment() {
+      return counter.value++;
+    }
+
+    function decrement() {
+      return counter.value--;
+    }
+
+    return { counter, increment, decrement };
   },
 };
 </script>
