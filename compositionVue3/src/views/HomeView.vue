@@ -34,7 +34,7 @@ const oddOrEven = computed(() => {
   return counterData.count % 2 === 0 ? "even" : "odd";
 });
 
-async function increment(amount) {
+const increment = async (amount) => {
   counterData.count = counterData.count + amount;
   await nextTick(() => {
     console.log('dom updated')
@@ -42,7 +42,7 @@ async function increment(amount) {
 
 }
 
-function decrement(amount) {
+const decrement = (amount) => {
   counterData.count -= amount;
 }
 
