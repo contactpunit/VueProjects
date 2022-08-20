@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ appTitle }}</h2>
+  <h2 ref="appTitleRef">{{ appTitle }}</h2>
   <div class="home">
     <h3>{{ counterData.title }}</h3>
     <div>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed, onActivated, onDeactivated, onMounted, reactive, watch } from "vue";
+import { computed, onActivated, onDeactivated, onMounted, reactive, ref, watch } from "vue";
 import {vAutofocus} from '../directives/vAutofocus.js'
 
 const appTitle = "My App";
@@ -24,6 +24,8 @@ const counterData = reactive({
   count: 0,
   title: "CounterApp",
 });
+
+const appTitleRef = ref(null)
 
 watch(() => counterData.count, (newCount) => {
   if(newCount >= 20) counterData.count = 1
@@ -43,7 +45,7 @@ function decrement(amount) {
 
 onMounted(() => {
   counterData.count = 0
-  console.log('reset counter to 0')
+  console.log(`App title is ${appTitleRef.value}`)
 })
 
 onActivated(() => console.log('on activated'))
