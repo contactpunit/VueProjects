@@ -10,7 +10,7 @@
     <p>This counter is {{ oddOrEven }}</p>
     <div class="edit">
       <h4>Edit counter title</h4>
-      <input v-model="counterData.title" type="text" />
+      <input v-model="counterData.title" type="text" v-autofocus />
     </div>
   </div>
 </template>
@@ -48,6 +48,12 @@ onMounted(() => {
 onActivated(() => console.log('on activated'))
 
 onDeactivated(() => console.log('on deactivated hook'))
+
+const vAutofocus = {
+  mounted: (el) => {
+    el.focus()
+  }
+}
 </script>
 
 <style>
