@@ -10,24 +10,6 @@
 
 <!--
 <script>
-export default {
-  data() {
-    return {
-      counter: 0,
-    };
-  },
-  methods: {
-    decrement() {
-      this.counter -= 1;
-    },
-    increment() {
-      this.counter += 1;
-    },
-  },
-};
-</script>
--->
-<script>
 import { ref } from "vue";
 
 export default {
@@ -45,6 +27,20 @@ export default {
     return { counter, increment, decrement };
   },
 };
+</script>
+-->
+<script setup>
+import { ref } from "vue";
+
+const counter = ref(0);
+
+function increment() {
+  return counter.value++;
+}
+
+function decrement() {
+  return counter.value--;
+}
 </script>
 
 <style>
