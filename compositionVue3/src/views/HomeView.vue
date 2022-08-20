@@ -17,6 +17,7 @@
 
 <script setup>
 import { computed, onActivated, onDeactivated, onMounted, reactive, watch } from "vue";
+import {vAutofocus} from '../directives/vAutofocus.js'
 
 const appTitle = "My App";
 const counterData = reactive({
@@ -49,11 +50,6 @@ onActivated(() => console.log('on activated'))
 
 onDeactivated(() => console.log('on deactivated hook'))
 
-const vAutofocus = {
-  mounted: (el) => {
-    el.focus()
-  }
-}
 </script>
 
 <style>
