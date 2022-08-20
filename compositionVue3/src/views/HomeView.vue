@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed, onActivated, onDeactivated, onMounted, reactive, ref, watch } from "vue";
+import { computed, onActivated, onDeactivated, onMounted, reactive, ref, watch, nextTick } from "vue";
 import {vAutofocus} from '../directives/vAutofocus.js'
 
 const appTitle = "My App";
@@ -25,7 +25,6 @@ const counterData = reactive({
   title: "CounterApp",
 });
 
-const appTitleRef = ref(null)
 
 watch(() => counterData.count, (newCount) => {
   if(newCount >= 20) counterData.count = 1
@@ -35,13 +34,19 @@ const oddOrEven = computed(() => {
   return counterData.count % 2 === 0 ? "even" : "odd";
 });
 
-function increment(amount) {
+async function increment(amount) {
   counterData.count = counterData.count + amount;
+  await nextTick(() => {
+    console.log('dom updated')
+  })
+
 }
 
 function decrement(amount) {
   counterData.count -= amount;
 }
+
+const appTitleRef = ref(null)
 
 onMounted(() => {
   counterData.count = 0
