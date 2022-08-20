@@ -5,6 +5,9 @@
             <router-link to="/posts">&lt; Back</router-link>
         </p>
         <div>
+            <button @click="goToHome">Go to Home</button>
+        </div>
+        <div>
             <button @click="showPostId">Show Post ID</button>
         </div>
     </div>
@@ -12,12 +15,18 @@
 
 <script setup>
 
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 const route = useRoute()
 
+const router = useRouter()
+
 const showPostId = () => {
     console.log(route.params.id)
+}
+
+const goToHome = () => {
+    router.push('/')
 }
 
 </script>
