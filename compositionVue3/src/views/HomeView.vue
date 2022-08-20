@@ -16,13 +16,17 @@
 </template>
 
 <script setup>
-import { computed, reactive } from "vue";
+import { computed, onActivated, onDeactivated, onMounted, reactive, watch } from "vue";
 
 const appTitle = "My App";
 const counterData = reactive({
   count: 0,
   title: "CounterApp",
 });
+
+watch(() => counterData.count, (newCount) => {
+  if(newCount >= 20) counterData.count = 1
+})
 
 const oddOrEven = computed(() => {
   return counterData.count % 2 === 0 ? "even" : "odd";
@@ -35,6 +39,15 @@ function increment(amount) {
 function decrement(amount) {
   counterData.count -= amount;
 }
+
+onMounted(() => {
+  counterData.count = 0
+  console.log('reset counter to 0')
+})
+
+onActivated(() => console.log('on activated'))
+
+onDeactivated(() => console.log('on deactivated hook'))
 </script>
 
 <style>
