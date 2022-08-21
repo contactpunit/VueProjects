@@ -3,14 +3,20 @@
     <div class="modal">
             <h1>{{ props.title }}</h1>
             <slot></slot>
-            <button @click="hideModal">Hide Modal</button>
+            <button @click="closeModal">Hide Modal</button>
         </div>
 </teleport>
 </template>
 
 <script setup>
+
 const props = defineProps(['title'])
-console.log(props.title)
+const modalEvent = defineEmits(['hideModal'])
+
+const closeModal = () => {
+    modalEvent('hideModal')
+}
+
 </script>
 
 
