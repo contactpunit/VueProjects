@@ -4,13 +4,16 @@
             <h1>{{ props.title }}</h1>
             <slot></slot>
             <button @click="$emit('update:modelValue', false)">Hide Modal</button>
+            <div>
+                Useename is {{userData.username}}
+            </div>
         </div>
 </teleport>
 </template>
 
 <script setup>
 
-const props = defineProps(['modelValue', 'title'])
+const props = defineProps(['modelValue', 'title', 'userData'])
 const modalEvent = defineEmits(['update:modelValue'])
 
 // const closeModal = () => {
