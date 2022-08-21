@@ -1,12 +1,21 @@
 <template>
 <teleport to="body">
     <div class="modal">
-            <h1>This is a modal</h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur consequatur distinctio nulla temporibus a tempore expedita repellat exercitationem dolor, ipsum, aliquid, sunt excepturi? Ad quasi, error fugiat facilis corrupti explicabo?</p>
+            <slot name="header"></slot>
+            <slot></slot>
+            <pre>{{ $slots.header() }}</pre>
             <button @click="hideModal">Hide Modal</button>
         </div>
 </teleport>
 </template>
+
+<script setup>
+import {useSlots} from 'vue'
+
+const slot = useSlots()
+console.log(slot.header())
+</script>
+
 
 <style scoped>
 .modal {
