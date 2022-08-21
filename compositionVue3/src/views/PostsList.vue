@@ -7,11 +7,18 @@
             </li>
         </ul>
     </div>
+    <div>
+            <button class="counter-button" @click="increment(3)">{{counterData.count}}</button>
+    </div>
 </template>
 
 <script setup>
 
 import {ref} from 'vue'
+import {useCounter} from '../use/useCounter.js'
+
+const {increment, counterData} = useCounter()
+
 
 const posts = ref([
     {
@@ -34,5 +41,11 @@ const posts = ref([
 <style scoped>
 ul {
     margin-bottom: 30px;
+}
+
+.counter-button {
+    font-size: 60px;
+    width: 100%;
+    background-color: pink;
 }
 </style>
