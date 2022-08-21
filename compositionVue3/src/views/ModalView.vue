@@ -6,7 +6,7 @@
             <input type="checkbox" v-model="isDarkModal">
         </div>
         <button @click="showModal" v-if="!modalOn">Show Modal</button>
-        <component v-model="modalOn" title="This is a Modal" :is="isDarkModal ? darkModal : UserModal" :userData="userData">
+        <component v-model="modalOn" title="This is a Modal" :is="isDarkModal ? darkModal : UserModal">
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur consequatur distinctio nulla temporibus a tempore expedita repellat exercitationem dolor, ipsum, aliquid, sunt excepturi? Ad quasi, error fugiat facilis corrupti explicabo?</p>
         </component>
         
@@ -25,8 +25,6 @@ const isDarkModal = ref(false)
 const showModal = () => {
     modalOn.value = true
 }
-
-const prop = defineProps(['userData'])
 
 
 </script>

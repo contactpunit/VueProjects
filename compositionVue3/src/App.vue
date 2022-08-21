@@ -8,17 +8,19 @@
     <RouterLink to="/modal">Modals</RouterLink>
   </nav>
 
-<router-view :userData="userData"></router-view>
+<router-view></router-view>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, provide } from "vue";
 
 
 const userData = reactive({
   name: 'punit',
   username: 'punitjain'
 })
+
+provide('userData', userData)
 </script>
 
 
