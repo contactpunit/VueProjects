@@ -3,7 +3,7 @@
     <div class="modal" v-if="modelValue">
             <h1>{{ props.title }}</h1>
             <slot></slot>
-            <button @click="$emit('update:modelValue')">Hide Modal</button>
+            <button @click="$emit('update:modelValue', false)">Hide Modal</button>
         </div>
 </teleport>
 </template>
