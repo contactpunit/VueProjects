@@ -1,19 +1,16 @@
 <template>
 <teleport to="body">
     <div class="modal">
-            <slot name="header"></slot>
+            <h1>{{ props.title }}</h1>
             <slot></slot>
-            <pre>{{ $slots.header() }}</pre>
             <button @click="hideModal">Hide Modal</button>
         </div>
 </teleport>
 </template>
 
 <script setup>
-import {useSlots} from 'vue'
-
-const slot = useSlots()
-console.log(slot.header())
+const props = defineProps(['title'])
+console.log(props.title)
 </script>
 
 
