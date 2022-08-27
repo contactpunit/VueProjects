@@ -1,23 +1,25 @@
 <template>
-    <div class="posts">
-        <h2>All Posts</h2>
-        <ul>
-            <li v-for="post in posts" :key="post.id">
-                <router-link :to="`/post/${post.id}`">{{post.title}}</router-link>
-            </li>
-        </ul>
-    </div>
-    <div>
-            <button class="counter-button" @click="increment(3)">{{counterData.count}}</button>
-    </div>
+  <div class="posts">
+    <h2>All Posts</h2>
+    <ul>
+      <li v-for="post in posts" :key="post.id">
+        <router-link :to="`/post/${post.id}`">{{ post.title }}</router-link>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button class="counter-button" @click="counter.increase(3)" :class="{'yellow' : counter.oddOrEven === 'even' }">
+      {{ counter.count }}
+    </button>
+  </div>
 </template>
 
 <script setup>
 
 import {ref} from 'vue'
-import {useCounter} from '../use/useCounter.js'
+import {useCounterStore} from '../stores/counter.js'
 
-const {increment, counterData} = useCounter()
+const counter = useCounterStore()
 
 
 const posts = ref([
@@ -34,18 +36,20 @@ const posts = ref([
         title: 'Post 3'
     }
 ])
-
 </script>
-
 
 <style scoped>
 ul {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .counter-button {
-    font-size: 60px;
-    width: 100%;
-    background-color: pink;
+  font-size: 60px;
+  width: 100%;
+  background-color: pink;
+}
+
+.yellow {
+    background-color: yellow;
 }
 </style>
