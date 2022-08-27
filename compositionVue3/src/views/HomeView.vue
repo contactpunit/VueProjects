@@ -1,39 +1,39 @@
 <template>
   <h2 ref="appTitleRef">{{ appTitle }}</h2>
   <div class="home">
-    <h3>{{ counterData.title }}</h3>
+    <h3>{{ counter.title}}</h3>
     <div>
-      <button class="btn" @click="decrement(2)">-</button>
-      <span class="counter">{{ counterData.count }}</span>
-      <button class="btn" @click="increment(5)">+</button>
+      <button class="btn" @click="counter.decrease(2)">-</button>
+      <span class="counter">{{ counter.count }}</span>
+      <button class="btn" @click="counter.increase(4)">+</button>
     </div>
-    <p>This counter is {{ oddOrEven }}</p>
+    <p>This counter is odd/even</p>
     <div class="edit">
-      <h4>Edit counter title</h4>
-      <input v-model="counterData.title" type="text" v-autofocus />
+      <h4>Edit counter title:</h4>
+      <input  v-model="counter.title" type="text" v-autofocus />
     </div>
   </div>
 </template>
 
 <script setup>
 import { onActivated, onDeactivated, onMounted, ref } from "vue";
-import {useCounter} from '../use/useCounter.js'
+import {useCounterStore} from '../stores/counter.js'
 import {vAutofocus} from '../directives/vAutofocus.js'
 
 const appTitle = "My App";
 
 const appTitleRef = ref(null)
 
-const {counterData, oddOrEven, increment, decrement} = useCounter()
-
 onMounted(() => {
-  counterData.count = 0
+  // counterData.count = 0
   console.log(`App title is ${appTitleRef.value}`)
 })
 
 onActivated(() => console.log('on activated'))
 
 onDeactivated(() => console.log('on deactivated hook'))
+
+const counter = useCounterStore()
 
 </script>
 
