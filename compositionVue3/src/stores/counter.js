@@ -14,5 +14,11 @@ export const useCounterStore = defineStore({
     decrease(value) {
       this.count -= value
     }
+  },
+  getters: {
+    oddOrEven: (state) => {
+      if (state.count % 2 === 0) return 'even'
+      return 'odd'
+    }
   }
 })
