@@ -9,22 +9,25 @@
 </template>
 
 <script>
-export default {
-  data () {
+import {ref} from 'vue'
+
+export default({
+  setup() {
+    const counter = ref(0)
+
+    function increment() {
+      return counter.value++
+    }
+
+    function decrement() {
+      return counter.value--
+    }
+
     return {
-      counter: 10
+      counter, increment, decrement
     }
   },
-  methods: {
-    increment() {
-      return this.counter++
-    },
-    decrement() {
-      return this.counter--
-    }
-  }
-}
-
+})
 </script>
 
 
