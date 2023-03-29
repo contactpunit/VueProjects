@@ -1,5 +1,47 @@
 <template>
   <div class="home">
-    <h1>This is Home Page</h1>
+    <div>
+      <button class="btn" @click="decrement">-</button>
+      <span class="counter">{{ counter }}</span>
+      <button class="btn" @click="increment">+</button>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      counter: 10
+    }
+  },
+  methods: {
+    increment() {
+      return this.counter++
+    },
+    decrement() {
+      return this.counter--
+    }
+  }
+}
+
+</script>
+
+
+<style scoped>
+.home {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 400px;
+}
+
+.btn, .counter {
+  flex-basis: auto;
+  width: 80px;
+  justify-content: space-between;
+  margin: 0 10px;
+  font-size: 40px;
+
+}
+</style>
