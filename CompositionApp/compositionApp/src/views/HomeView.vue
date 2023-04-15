@@ -1,54 +1,40 @@
 <template>
   <div class="home">
-    <h3>{{ counterTitle }}</h3>
+    <h3>{{ counterData.counterTitleValue }}</h3>
     <div>
       <button class="btn" @click="decrement">-</button>
-      <span class="counter">{{ counter }}</span>
+      <span class="counter">{{ counterData.counterValue }}</span>
       <button class="btn" @click="increment">+</button>
+    </div>
+
+    <div class="edit">
+      <h4>Edit counter title: </h4>
+      <input v-model="counterData.counterTitleValue" type="text">
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+
+const counterData = reactive({
+  counterValue: 10,
+  counterTitleValue: 'My Test App'
+})
 
 const counter = ref( 0 )
 
 const counterTitle = ref( 'My App' )
 
 function increment() {
-  return counter.value++
+  return counterData.counterValue++
 }
 
 function decrement() {
-  return counter.value--
+  return counterData.counterValue--
 }
-
 </script>
-<!-- <script>
-import {ref} from 'vue'
-
-export default({
-  setup() {
-    const counter = ref(0)
-
-    const counterTitle = ref('My App')
-
-    function increment() {
-      return counter.value++
-    }
-
-    function decrement() {
-      return counter.value--
-    }
-
-    return {
-      counter, increment, decrement, counterTitle
-    }
-  },
-})
-</script> -->
 
 
 <style scoped>
@@ -72,6 +58,9 @@ h3 {
   margin: 0 10px;
   font-size: 40px;
   flex-grow: 1;
+}
 
+.edit {
+  margin-top: 60px;
 }
 </style>
