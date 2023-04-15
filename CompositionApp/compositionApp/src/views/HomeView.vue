@@ -19,7 +19,7 @@
 
 
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 const counterData = reactive({
   counterValue: 10,
@@ -29,6 +29,10 @@ const counterData = reactive({
 const oddOrEven = computed(() => {
   if(counterData.counterValue % 2 === 0) return 'even'
   else return 'odd'
+})
+
+watch(() => counterData.counterValue, (newValue, oldValue) => {
+  if(newValue > 20) counterData.counterValue = 0
 })
 
 const counter = ref( 0 )
