@@ -9,7 +9,24 @@
   </div>
 </template>
 
-<script>
+
+<script setup>
+import { ref } from 'vue'
+
+const counter = ref( 0 )
+
+const counterTitle = ref( 'My App' )
+
+function increment() {
+  return counter.value++
+}
+
+function decrement() {
+  return counter.value--
+}
+
+</script>
+<!-- <script>
 import {ref} from 'vue'
 
 export default({
@@ -31,7 +48,7 @@ export default({
     }
   },
 })
-</script>
+</script> -->
 
 
 <style scoped>
