@@ -19,7 +19,7 @@
 
 
 <script setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, onActivated, onDeactivated, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 
 const counterData = reactive({
   counterValue: 10,
@@ -35,6 +35,22 @@ watch(() => counterData.counterValue, (newValue, oldValue) => {
   if(newValue > 20) counterData.counterValue = 0
 })
 
+onMounted(() => {
+  console.log('mounted')
+})
+
+onUnmounted(()=> {
+  console.log('unmounted')
+})
+
+onActivated(() => {
+  console.log('activated')
+})
+
+onDeactivated(() => {
+  console.log('deactivated')
+})
+
 const counter = ref( 0 )
 
 const counterTitle = ref( 'My App' )
@@ -47,7 +63,6 @@ function decrement() {
   return counterData.counterValue--
 }
 </script>
-
 
 <style scoped>
 .home {
