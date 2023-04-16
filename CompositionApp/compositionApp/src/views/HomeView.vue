@@ -10,7 +10,7 @@
     <div class="edit">
       <p>This counter is {{ oddOrEven }}</p>
       <h4>Edit counter title: </h4>
-      <input v-model="counterData.counterTitleValue" type="text">
+      <input v-model="counterData.counterTitleValue" type="text" v-AutoFocus>
     </div>
 
 
@@ -51,9 +51,15 @@ onDeactivated(() => {
   console.log('deactivated')
 })
 
-const counter = ref( 0 )
+// const counter = ref( 0 )
 
-const counterTitle = ref( 'My App' )
+// const counterTitle = ref( 'My App' )
+
+const vAutoFocus = {
+  mounted: (el) => {
+    el.focus()
+  }
+}
 
 function increment() {
   return counterData.counterValue++

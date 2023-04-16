@@ -2,14 +2,8 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <router-view></router-view>
       </nav>
-
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-      <component :is="Component" />
-      </keep-alive>
-  </router-view>
-
 </template>
 
 <style scoped>
