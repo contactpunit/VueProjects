@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed, onActivated, onDeactivated, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { vAutoFocus } from '@/directives/vAutoFocus'
 
 const counterData = reactive({
   counterValue: 10,
@@ -54,12 +55,6 @@ onDeactivated(() => {
 // const counter = ref( 0 )
 
 // const counterTitle = ref( 'My App' )
-
-const vAutoFocus = {
-  mounted: (el) => {
-    el.focus()
-  }
-}
 
 function increment() {
   return counterData.counterValue++
