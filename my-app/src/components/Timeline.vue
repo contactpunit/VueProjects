@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { DateTime } from "luxon";
-import { today, thisWeek, thisMonth } from "../posts";
+import { TimelinePost, today, thisWeek, thisMonth } from "../posts";
 import { computed } from "@vue/reactivity";
 import TimelineItem from "./TimelineItem.vue";
 
@@ -9,7 +9,7 @@ const periods = ["Today", "This Week", "This Month"] as const;
 
 const selectedPeriod = ref<Period>("Today");
 
-const posts = computed(() => {
+const posts = computed<TimelinePost[]>(() => {
   return [today, thisWeek, thisMonth]
     .map((post) => {
       return {
