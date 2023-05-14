@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { DateTime } from "luxon";
-import { Post, today, thisWeek, thisMonth } from "../posts";
+import { today, thisWeek, thisMonth } from "../posts";
 import { computed } from "@vue/reactivity";
+import TimelineItem from "./TimelineItem.vue";
 
 const periods = ["Today", "This Week", "This Month"] as const;
 
@@ -35,20 +36,17 @@ function selectPeriod(period: Period) {
 
 <template>
   <nav class="is-primary panel">
-    {{ selectedPeriod }}
     <span class="panel-tabs">
       <a
         href="#"
         v-for="period of periods"
         :key="period"
         @click="selectPeriod(period)"
-        >{{ period }}</a
-      >
+        >{{ period }}
+      </a>
     </span>
 
-    <a href="#" v-for="post of posts" :key="post.id" class="panel-block">
-      <a href="">{{ post.title }}</a>
-      <div>{{ post.created.toFormat("d MMM") }}</div>
-    </a>
+    <TimelineItem href="#" v-for="post of posts" :key="post.id" :post="post">
+    </TimelineItem>
   </nav>
 </template>
