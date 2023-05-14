@@ -2,10 +2,13 @@
 import { ref } from "vue";
 import { DateTime } from "luxon";
 import { TimelinePost, today, thisWeek, thisMonth } from "../posts";
+import { usePosts } from "../stores/posts";
 import { computed } from "@vue/reactivity";
 import TimelineItem from "./TimelineItem.vue";
 
 const periods = ["Today", "This Week", "This Month"] as const;
+
+const postsStore = usePosts();
 
 const selectedPeriod = ref<Period>("Today");
 
@@ -36,6 +39,8 @@ function selectPeriod(period: Period) {
 
 <template>
   <nav class="is-primary panel">
+    {{ postsStore.getState().foo }}
+    <button @click="postsStore.updateFoo('updating store')">update</button>
     <span class="panel-tabs">
       <a
         href="#"
