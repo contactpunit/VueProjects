@@ -1,11 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const periods = ["Today", "This Week", "This Month"];
+</script>
 
 <template>
   <nav class="is-primary panel">
     <span class="panel-tabs">
-      <a href="#">Today</a>
-      <a href="#">This Week</a>
-      <a href="#">This Month</a>
+      <a href="#" v-for="period of periods" :key="period">{{ period }}</a>
     </span>
   </nav>
 </template>
