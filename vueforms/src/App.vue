@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormKit type="form" :value="formData" @submit="submitData">
+    <FormKit type="form" submit-behavior="live" :value="formData" @submit="submitData">
       <h1>Login</h1>
       <FormKit type="text" username="username" name="username"></FormKit>
       <FormKit type="password" username="password" name="password"></FormKit>
