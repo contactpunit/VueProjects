@@ -3,13 +3,17 @@
     
       <FormKitSchema
       :data="{
-        formData
+        formData,
+        attrs: {
+          onSubmit: submitData
+        }
       }"
       :schema="[
         {
           $formkit: 'form',
           value: '$formData',
           submitLabel: 'Login',
+          bind: '$attrs',
           children: [
           {
             $el: 'h1',
@@ -39,7 +43,7 @@
 
 <script setup>
 import { ref } from "vue";
-// import {wait} from './utils/index.ts'
+import {wait} from './utils/index.ts'
 import { FormKitSchema } from '@formkit/vue'
 
 const formData = ref({
@@ -47,10 +51,10 @@ const formData = ref({
   password: ""
 })
 
-// async function submitData(data) {
-//   await wait(3000)
-//   console.log(data)
-// }
+async function submitData(data) {
+  await wait(3000)
+  console.log(data)
+}
 
 async function isUsernameValid(node) {
   const usernames = [
