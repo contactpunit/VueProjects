@@ -1,22 +1,28 @@
 <template>
   <div>
     <FormKit type="form" :value="formData" @submit="submitData">
-      <template #default>
-        <h1>Login</h1>
-        <FormKit 
-          type="text"
-          username="username"
-          name="username"
-          validation="required|(200)isUsernameValid"
-          :validation-rules="{ isUsernameValid }"
-          :validation-messages="{
-            isUsernameValid({args, name, node}) {
-              return `Username ${node.value} is not valid. Please enter valid username`
-            }
-          }"
-        ></FormKit>
-        <FormKit type="password" username="password" name="password" :validation="[['required'], ['length', 8, 20]]"></FormKit>
-    </template>
+      <FormKitSchema :schema="[
+    {
+      $el: 'h1',
+      children: 'Login'
+    },
+    {
+      $formkit: 'text',
+      username: 'username',
+      name: 'username',
+      label: 'username',
+      validation: 'required|(200)isUsernameValid',
+      'validation-rules': validateRules(),
+      'validation-messages': validateMessage()
+    },
+    {
+      $formkit: 'password',
+      name: 'password',
+      label: 'password',
+      validation: validatePassword()
+    }
+  ]">
+  </FormKitSchema>
     </FormKit>
   </div>
 </template>
@@ -24,6 +30,7 @@
 <script setup>
 import { ref } from "vue";
 import {wait} from './utils/index.ts'
+import { FormKitSchema } from '@formkit/vue'
 
 const formData = ref({
   username: "punit_j",
@@ -41,5 +48,23 @@ async function isUsernameValid(node) {
     'punitj'
   ]
   return usernames.includes(node.value)
+}
+
+function validateMessage() {
+  return {
+    isUsernameValid({args, name, node}) {
+      console.log(args, name)
+      return `Username ${node.value} is not valid. Please enter valid username`
+    }
+  }
+}
+
+function validateRules() {
+  return { isUsernameValid }
+}
+
+function validatePassword() {
+  return 'required|length: 8, 20'
+  // return "[['required'], ['length', 8, 20]]"
 }
 </script>
