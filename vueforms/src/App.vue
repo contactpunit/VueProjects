@@ -1,35 +1,45 @@
 <template>
   <div>
-    <FormKit type="form" :value="formData" @submit="submitData">
-      <FormKitSchema :schema="[
-    {
-      $el: 'h1',
-      children: 'Login'
-    },
-    {
-      $formkit: 'text',
-      username: 'username',
-      name: 'username',
-      label: 'username',
-      validation: 'required|(200)isUsernameValid',
-      'validation-rules': validateRules(),
-      'validation-messages': validateMessage()
-    },
-    {
-      $formkit: 'password',
-      name: 'password',
-      label: 'password',
-      validation: validatePassword()
-    }
+    
+      <FormKitSchema
+      :data="{
+        formData
+      }"
+      :schema="[
+        {
+          $formkit: 'form',
+          value: '$formData',
+          submitLabel: 'Login',
+          children: [
+          {
+            $el: 'h1',
+            children: 'Login'
+          },
+          {
+            $formkit: 'text',
+            username: 'username',
+            name: 'username',
+            label: 'Username',
+            validation: 'required|(200)isUsernameValid',
+            'validation-rules': validateRules(),
+            'validation-messages': validateMessage()
+          },
+          {
+            $formkit: 'password',
+            name: 'password',
+            label: 'Password',
+            validation: validatePassword()
+          }
+        ]
+      },
   ]">
   </FormKitSchema>
-    </FormKit>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import {wait} from './utils/index.ts'
+// import {wait} from './utils/index.ts'
 import { FormKitSchema } from '@formkit/vue'
 
 const formData = ref({
@@ -37,10 +47,10 @@ const formData = ref({
   password: ""
 })
 
-async function submitData(data) {
-  await wait(3000)
-  console.log(data)
-}
+// async function submitData(data) {
+//   await wait(3000)
+//   console.log(data)
+// }
 
 async function isUsernameValid(node) {
   const usernames = [
@@ -65,6 +75,5 @@ function validateRules() {
 
 function validatePassword() {
   return 'required|length: 8, 20'
-  // return "[['required'], ['length', 8, 20]]"
 }
 </script>
