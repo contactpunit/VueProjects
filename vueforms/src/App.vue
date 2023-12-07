@@ -9,6 +9,11 @@
           name="username"
           validation="required|(200)isUsernameValid"
           :validation-rules="{ isUsernameValid }"
+          :validation-messages="{
+            isUsernameValid({args, name, node}) {
+              return `Username ${node.value} is not valid. Please enter valid username`
+            }
+          }"
         ></FormKit>
         <FormKit type="password" username="password" name="password" :validation="[['required'], ['length', 8, 20]]"></FormKit>
     </template>
