@@ -1,29 +1,32 @@
 <script lang="ts" setup>
+import {v1} from "uuid";
 import EmojiField from "@/components/EmojiField.vue";
 import ArrowCircleRight from "@/assets/icons/arrow-circle-right.svg";
 import { ref, computed } from "vue"
 import type Emoji from "../types/Emoji"
+import type Entry from "@/types/Entry";
 
-const text = ref("")
+const body = ref("")
 
 const emoji = ref<Emoji|null>(null)
 
-const charCount = computed(()=> text.value.length)
+const charCount = computed(()=> body.value.length)
 
 defineEmits<{
-  (e: "create", entry: {text: string, emoji: Emoji| null}): void
+  (e: "create", entry: Entry): void
 }>()
 
 
 const handleTextLength = (e: Event) => {
   const textData = e.target as HTMLTextAreaElement
-  if(textData.value.length > 280) textData.value = text.value = textData.value.substring(0, 280)
+  if(textData.value.length > 280) textData.value = body.value = textData.value.substring(0, 280)
+  else body.value = textData.value
 }
 
 </script>
 <template>
-  <form class="entry-form" @submit.prevent="$emit('create', {text, emoji})">
-    <textarea :value="text" @keyup="handleTextLength" placeholder="New Journal Entry for danielkelly_io"></textarea>
+  <form class="entry-form" @submit.prevent="$emit('create', {id: 1, body, createdAt: new Date(), userId:v1(), emoji})">
+    <textarea :value="body" @keyup="handleTextLength" placeholder="New Journal Entry for danielkelly_io"></textarea>
     <EmojiField v-model="emoji"/>
     <div class="entry-form-footer">
       <span>{{ charCount }} / 280</span>
