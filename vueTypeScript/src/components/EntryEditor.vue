@@ -2,9 +2,10 @@
 import {v1} from "uuid";
 import EmojiField from "@/components/EmojiField.vue";
 import ArrowCircleRight from "@/assets/icons/arrow-circle-right.svg";
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted, inject } from "vue"
 import type Emoji from "../types/Emoji"
 import type Entry from "@/types/Entry";
+import { userInjectionKey } from "@/InjectionKey";
 
 const body = ref("")
 
@@ -13,6 +14,8 @@ const emoji = ref<Emoji|null>(null)
 const charCount = computed(()=> body.value.length)
 
 const textarea = ref<HTMLTextAreaElement | null>(null)
+
+const injectedUser = inject(userInjectionKey)
 
 onMounted(() => textarea.value?.focus())
 
@@ -36,7 +39,7 @@ const submitForm = () => {
 </script>
 <template>
   <form class="entry-form" @submit.prevent="submitForm">
-    <textarea :value="body" ref="textarea" @keyup="handleTextLength" placeholder="New Journal Entry for danielkelly_io"></textarea>
+    <textarea :value="body" ref="textarea" @keyup="handleTextLength" :placeholder="`New Journal Entry for ${injectedUser?.username}`"></textarea>
     <EmojiField v-model="emoji"/>
     <div class="entry-form-footer">
       <span>{{ charCount }} / 280</span>
