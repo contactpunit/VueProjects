@@ -12,7 +12,7 @@ const emoji = ref<Emoji|null>(null)
 
 const charCount = computed(()=> body.value.length)
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "create", entry: Entry): void
 }>()
 
@@ -23,9 +23,15 @@ const handleTextLength = (e: Event) => {
   else body.value = textData.value
 }
 
+const submitForm = () => {
+  emit('create', {id: 1, body: body.value, createdAt: new Date(), userId:v1(), emoji: emoji.value})
+  body.value = ''
+  emoji.value = null
+}
+
 </script>
 <template>
-  <form class="entry-form" @submit.prevent="$emit('create', {id: 1, body, createdAt: new Date(), userId:v1(), emoji})">
+  <form class="entry-form" @submit.prevent="submitForm">
     <textarea :value="body" @keyup="handleTextLength" placeholder="New Journal Entry for danielkelly_io"></textarea>
     <EmojiField v-model="emoji"/>
     <div class="entry-form-footer">

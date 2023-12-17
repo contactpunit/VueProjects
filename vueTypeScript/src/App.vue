@@ -14,8 +14,11 @@ const user: User = reactive({
 
 console.log(user)
 
+const allEntries: Entry[] = reactive([])
+
+
 const handleEmittedData = (entry: Entry) =>{
-  console.log(entry)
+  allEntries.unshift(entry)
 }
 
 
@@ -26,8 +29,8 @@ const handleEmittedData = (entry: Entry) =>{
     <TheHeader />
     <EntryEditor @create="handleEmittedData"/>
     <ul>
-      <li>
-        <EntryCard />
+      <li v-for="entry in allEntries" :key="entry.id">
+        <EntryCard :entry="entry" />
       </li>
     </ul>
   </main>
