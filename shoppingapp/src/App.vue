@@ -33,7 +33,7 @@ const items: Ref<Item[]> = ref([])
   </div>
   <form class="add-item-form" @submit.prevent="saveItem" v-if="formEnabled">
     <input v-model.trim="inputItem" type="text" placeholder="Add new item">
-    <button class="btn btn-primary">Save Item</button>
+    <button class="btn btn-primary" :disabled="!inputItem.length">Save Item</button>
   </form>
   <ul v-if="items.length">
     <li v-for="item in items" :key="item.id">
