@@ -4,6 +4,14 @@ import type Item from './types/item'
 
 const header = ref('Shopping List App')
 
+const inputItem = ref('')
+
+const saveItem = (e: Event) => {
+  e.preventDefault()
+  console.log(inputItem.value)
+  items.value.push({id: Math.random(), name: inputItem.value})
+}
+
 const items: Ref<Item[]> = ref([
   {id: 1, name: '10 hats'},
   {id: 2, name: '4 caps'},
@@ -13,9 +21,13 @@ const items: Ref<Item[]> = ref([
 
 <template>
   <h1>{{  header }}</h1>
+  <div>
+    <input v-model.trim="inputItem" type="text" placeholder="Add new item">
+    <button class="btn btn-primary" @click="saveItem">Save Item</button>
+  </div>
   <ul>
     <li v-for="item in items" :key="item.id">
-    {{ item }}</li>
+    {{ item.name }}</li>
   </ul>
 </template>
 
@@ -127,7 +139,7 @@ li input {
 .btn {
   border: none;
   border-radius: 3px;
-  margin: auto 0;
+  margin: auto 12px;
   padding: 0.5rem 0.75rem;
   flex-shrink: 0;
   cursor: pointer;
