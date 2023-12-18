@@ -21,10 +21,10 @@ const items: Ref<Item[]> = ref([
 
 <template>
   <h1>{{  header }}</h1>
-  <div>
+  <form class="add-item-form" @submit.prevent="saveItem">
     <input v-model.trim="inputItem" type="text" placeholder="Add new item">
-    <button class="btn btn-primary" @click="saveItem">Save Item</button>
-  </div>
+    <button class="btn btn-primary">Save Item</button>
+  </form>
   <ul>
     <li v-for="item in items" :key="item.id">
     {{ item.name }}</li>
@@ -139,7 +139,7 @@ li input {
 .btn {
   border: none;
   border-radius: 3px;
-  margin: auto 12px;
+  margin: auto 0;
   padding: 0.5rem 0.75rem;
   flex-shrink: 0;
   cursor: pointer;
