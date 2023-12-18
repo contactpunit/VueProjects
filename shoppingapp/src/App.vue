@@ -6,29 +6,40 @@ const header = ref('Shopping List App')
 
 const inputItem = ref('')
 
+const formEnabled = ref(false)
+
 const saveItem = (e: Event) => {
   e.preventDefault()
-  console.log(inputItem.value)
   items.value.push({id: Math.random(), name: inputItem.value})
+  inputItem.value = ''
 }
 
-const items: Ref<Item[]> = ref([
-  {id: 1, name: '10 hats'},
-  {id: 2, name: '4 caps'},
-  {id: 3, name: '6 socks'},
-])
+const enableForm = () => {
+  formEnabled.value = true
+}
+
+const disableForm = () => {
+  formEnabled.value = false
+}
+
+const items: Ref<Item[]> = ref([])
 </script>
 
 <template>
-  <h1>{{  header }}</h1>
-  <form class="add-item-form" @submit.prevent="saveItem">
+  <div class="header">
+    <h1>{{  header }}</h1>
+    <button class="btn" @click="disableForm">Cancel</button>
+    <button class="btn btn-primary" @click="enableForm">Add Item</button>
+  </div>
+  <form class="add-item-form" @submit.prevent="saveItem" v-if="formEnabled">
     <input v-model.trim="inputItem" type="text" placeholder="Add new item">
     <button class="btn btn-primary">Save Item</button>
   </form>
-  <ul>
+  <ul v-if="items.length">
     <li v-for="item in items" :key="item.id">
     {{ item.name }}</li>
   </ul>
+  <p v-else>No items added to the cart yet !</p>
 </template>
 
 <style>
