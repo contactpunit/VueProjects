@@ -16,7 +16,14 @@ const randomChoice = (): boolean => {
 
 const saveItem = (e: Event) => {
   e.preventDefault()
-  items.value.push({id: Math.random(), name: inputItem.value, purchased: randomChoice()})
+  items.value.push(
+    {
+      id: Math.random(),
+      name: inputItem.value,
+      purchased: randomChoice(),
+      priority: randomChoice()
+    }
+  )
   inputItem.value = ''
 }
 
@@ -26,6 +33,10 @@ const enableForm = () => {
 
 const disableForm = () => {
   formEnabled.value = false
+}
+
+const togglePriority = (item: Item): void => {
+  item.priority = !item.priority
 }
 
 const items: Ref<Item[]> = ref([])
@@ -42,10 +53,14 @@ const items: Ref<Item[]> = ref([])
     <button class="btn btn-primary" :disabled="!inputItem.length">Save Item</button>
   </form>
   <ul v-if="items.length">
-    <li 
+    <li
+    @click="togglePriority(item)" 
       v-for="item in items"
       :key="item.id"
-      :class="{strikeout: item.purchased}"
+      :class="{
+        strikeout: item.purchased,
+        priority: item.priority
+      }"
     >
     {{ item.name }}</li>
   </ul>
