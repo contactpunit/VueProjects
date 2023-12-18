@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, computed, ref } from 'vue';
 import type Item from './types/item'
 
 const header = ref('Shopping List App')
@@ -27,6 +27,10 @@ const saveItem = (e: Event) => {
   inputItem.value = ''
 }
 
+const reversedItems = computed<Item[]>(() => {
+  return [...items.value].reverse()
+})
+
 const enableForm = () => {
   formEnabled.value = true
 }
@@ -39,6 +43,10 @@ const togglePriority = (item: Item): void => {
   item.priority = !item.priority
 }
 
+const typedLength = computed(() => {
+  return inputItem.value.length
+})
+
 const items: Ref<Item[]> = ref([])
 </script>
 
@@ -50,12 +58,13 @@ const items: Ref<Item[]> = ref([])
   </div>
   <form class="add-item-form" @submit.prevent="saveItem" v-if="formEnabled">
     <input v-model.trim="inputItem" type="text" placeholder="Add new item">
+    <span>{{ typedLength }}/200</span>
     <button class="btn btn-primary" :disabled="!inputItem.length">Save Item</button>
   </form>
   <ul v-if="items.length">
     <li
     @click="togglePriority(item)" 
-      v-for="item in items"
+      v-for="item in reversedItems"
       :key="item.id"
       :class="{
         strikeout: item.purchased,
