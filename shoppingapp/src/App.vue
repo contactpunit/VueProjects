@@ -8,9 +8,15 @@ const inputItem = ref('')
 
 const formEnabled = ref(false)
 
+const randomChoice = (): boolean => {
+  const choices = [true, false];
+  const choice = Math.floor(Math.random() * choices.length);
+  return choices[choice]
+}
+
 const saveItem = (e: Event) => {
   e.preventDefault()
-  items.value.push({id: Math.random(), name: inputItem.value})
+  items.value.push({id: Math.random(), name: inputItem.value, purchased: randomChoice()})
   inputItem.value = ''
 }
 
@@ -36,7 +42,11 @@ const items: Ref<Item[]> = ref([])
     <button class="btn btn-primary" :disabled="!inputItem.length">Save Item</button>
   </form>
   <ul v-if="items.length">
-    <li v-for="item in items" :key="item.id">
+    <li 
+      v-for="item in items"
+      :key="item.id"
+      :class="{strikeout: item.purchased}"
+    >
     {{ item.name }}</li>
   </ul>
   <p v-else>No items added to the cart yet !</p>
