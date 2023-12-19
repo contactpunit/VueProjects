@@ -1,4 +1,7 @@
 Vue.createApp({
+})
+.component('planpicker', {
+    template: '#planpicker-template',
     data() {
         return {
             plans: ['The Addict','The Curious', 'The Single', 'The Hilarious']
