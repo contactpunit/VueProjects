@@ -11,39 +11,48 @@
        class="ui container">
     <h1>GitHub Profiles</h1>
     {{me}}
-    <github-user-card username="danielkellyio"></github-user-card>
+    <github-user-card username="contactpunit"
+      :name="name"
+      :created_at="created_at"
+      :followers="followers"
+      :avatarUrl="avatarUrl"
+      :bio="bio"
+    ></github-user-card>
 
     <!-- Template for GitHub card -->
+    
+
+  </div>
+
+  <script type="text/x-template" id="github-user-card-template">
     <div class="ui card">
       <div class="image">
-        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png">
+        <img :src="avatarUrl" alt="Punit Pic">
       </div>
       <div class="content">
-        <a class="header">Kristy</a>
+        <a class="header">{{ name }}</a>
         <div class="meta">
-          <span class="date">Joined in 2013</span>
+          <span class="date">Joined in {{ created_at }}</span>
         </div>
         <div class="description">
-          Kristy is an art director living in New York.
+          {{ bio }}.
         </div>
       </div>
       <div class="extra content">
         <a>
           <i class="user icon"></i>
-          22 Friends
+          {{ followers }} Friends
         </a>
       </div>
     </div>
-  </div>
+  </script>
 
   <!-- Import Vue.js and axios -->
   <script src="https://unpkg.com/vue@3"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <!-- Your JavaScript Code :) -->
-  <script>
-    Vue.createApp({}).mount('#app')
-  </script>
+  <script src="app.js"></script>
+
 </body>
 
 </html>
