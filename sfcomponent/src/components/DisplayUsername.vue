@@ -13,9 +13,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .username {
     font-size: 50px;
-    color: yellow;
+    color: #dcae1d;
 }
 </style>
