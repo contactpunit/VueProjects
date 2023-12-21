@@ -1,18 +1,33 @@
 <template>
   <div class="hello">
-    <display-username username="contactpunit"></display-username>
+    <button @click="toggleUsername">Toggle Username</button>
+    <h1 class="username">{{  msg }}</h1>
+    <div v-if="showUsername">
+      <display-username username="contactpunit"></display-username>
+    </div>
   </div>
 </template>
 
 <script>
-import DisplayUsername from '@/components/DisplayUsername.vue'
+import { defineAsyncComponent } from 'vue'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
   components: {
-    DisplayUsername
+    DisplayUsername: defineAsyncComponent(() => import(/* webpackChunkName: 'DisplayUsername' */'./DisplayUsername.vue'))
+  },
+  data () {
+    return {
+      showUsername: false
+    }
+  },
+  methods: {
+    toggleUsername () {
+      this.showUsername = !this.showUsername
+    }
   }
 }
 </script>
