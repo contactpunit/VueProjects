@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import PageHome from './components/PageHome.vue';
 
 </script>
 
@@ -11,7 +10,9 @@ import PageHome from './components/PageHome.vue';
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
-    <div class="container"><PageHome></PageHome></div>
+    <div class="container">
+      <RouterView />
+    </div>
   </div>
 </template>
 

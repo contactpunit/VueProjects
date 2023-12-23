@@ -73,30 +73,30 @@ const userById = (id: string) => {
             :key="postid"
             >
             
-            <div class="user-info">
-                <a href="#" class="user-name">{{ userById(postById(postid).userId)?.name }}</a>
+                <div class="user-info">
+                    <a href="#" class="user-name">{{ userById(postById(postid).userId)?.name }}</a>
 
-                <a href="#">
-                    <img class="avatar-large" :src="userById(postById(postid).userId)?.avatar" alt="">
-                </a>
+                    <a href="#">
+                        <img class="avatar-large" :src="userById(postById(postid).userId)?.avatar" alt="">
+                    </a>
 
-                <p class="desktop-only text-small">107 posts</p>
-            </div>
-            
-            <div class="post-content">
-                <div>
-                    <p>
-                        {{ postById(postid).text }}
-                    </p>
+                    <p class="desktop-only text-small">107 posts</p>
                 </div>
-            </div>
-            
-            <div class="post-date text-faded">
-                {{ postById(postid).publishedAt }}
+                
+                <div class="post-content">
+                    <div>
+                        <p>
+                            {{ postById(postid).text }}
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="post-date text-faded">
+                    {{ postById(postid).publishedAt }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <style scoped>
