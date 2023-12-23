@@ -1,20 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
-import AboutPage from '@/views/AboutPage.vue'
-import BrazilPage from '../views/BrazilPage.vue'
-import HawaiiPage from '../views/HawaiiPage.vue'
-import JamaicaPage from '../views/JamaicaPage.vue'
-import PanamaPage from '../views/PanamaPage.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 
 const routes = [
     { path: '/', name: 'home', component: HomePage},
-    {path: '/about', component: AboutPage},
-    {path: '/brazil', component: BrazilPage},
-    {path: '/hawaii', component: HawaiiPage},
-    {path: '/panama', component: PanamaPage},
-    {path: '/jamaica', component: JamaicaPage}
+    {path: '/about', component: ()=> import('../views/AboutPage.vue')},
+    {path: '/brazil', component: ()=> import('../views/BrazilPage.vue')},
+    {path: '/hawaii', component: ()=> import('../views/HawaiiPage.vue')},
+    {path: '/panama', component: ()=> import('../views/PanamaPage.vue')},
+    {path: '/jamaica', component: ()=> import('../views/JamaicaPage.vue')}
 ] as RouteRecordRaw[]
 
 const router = createRouter({
