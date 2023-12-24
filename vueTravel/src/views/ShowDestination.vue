@@ -15,13 +15,14 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const destination = ref()
 
-async function getDestination() {
+async function doApiCall() {
     const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
     destination.value = await response.json()
-    watch(route, async () => {
-        const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
-        destination.value = await response.json()
-    })
+}
+
+async function getDestination() {
+    doApiCall()
+    watch(route, doApiCall)
 }
 
 getDestination()
