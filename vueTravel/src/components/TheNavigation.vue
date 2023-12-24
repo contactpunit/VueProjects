@@ -7,7 +7,7 @@ const destinations = reactive(sourceData.destinations)
 
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
+    <router-link id="logo" to="/">Home</router-link>
     <router-link to="about">About</router-link>
     <router-link
       v-for="destination in destinations"
@@ -15,7 +15,8 @@ const destinations = reactive(sourceData.destinations)
       :to="{
         name: 'destination',
         params: {
-            id: destination.id
+            id: destination.id,
+            slug: destination.slug
         }
       }">
       {{ destination.name }}

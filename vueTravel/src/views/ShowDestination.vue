@@ -14,6 +14,7 @@ import { useRoute } from 'vue-router';
 import sourceData from '../data.json'
 
 const route = useRoute()
+console.log(route)
 
 const destinationId = computed<number>(() => {
     return +route.params.id
