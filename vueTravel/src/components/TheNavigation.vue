@@ -10,3 +10,10 @@
     <router-link to="jamaica">Jamaica</router-link>
   </div>
 </template>
+
+<style>
+#nav .router-bold {
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+</style>
