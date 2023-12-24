@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
@@ -22,7 +22,7 @@ async function doApiCall() {
 
 async function getDestination() {
     doApiCall()
-    watch(route, doApiCall)
+    // watch(route, doApiCall)
 }
 
 getDestination()
