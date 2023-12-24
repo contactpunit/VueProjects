@@ -9,16 +9,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const destination = ref()
 
-
 async function getDestination() {
     const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
     destination.value = await response.json()
+    watch(route, async () => {
+        const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
+        destination.value = await response.json()
+    })
 }
 
 getDestination()
