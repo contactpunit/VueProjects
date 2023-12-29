@@ -6,16 +6,31 @@
             <p>{{ destination.description }}</p>
         </div>
     </section>
+    <section class="experiences" v-if="destination">
+        <h2>Top experiences in {{ destination.name }}</h2>
+        <div class="cards">
+            <ExperienceCard 
+              v-for="experience in destination.experiences"
+              :key="experience.slug"
+              :experience="experience"></ExperienceCard>
+        </div>
+    </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineProps, onMounted } from 'vue'
 // import { useRoute } from 'vue-router';
+import ExperienceCard from '../components/ExperienceCard.vue';
 
 // const route = useRoute()
 const destination = ref()
 const props = defineProps({
-    slug: {type: String, required: true}
+    slug: {type: String, required: true},
+    id: {type: String, required: true}
+});
+
+onMounted(async() => {
+    await doApiCall()
 })
 
 async function doApiCall() {
@@ -24,11 +39,5 @@ async function doApiCall() {
     destination.value = await response.json()
 }
 
-async function getDestination() {
-    doApiCall()
-    // watch(route, doApiCall)
-}
-
-getDestination()
 
 </script>
