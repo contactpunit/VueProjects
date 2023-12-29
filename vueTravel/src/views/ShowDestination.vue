@@ -10,13 +10,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
-const route = useRoute()
+// const route = useRoute()
 const destination = ref()
+const props = defineProps({
+    slug: {type: String, required: true}
+})
 
 async function doApiCall() {
-    const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
+    // const response = await fetch(`https://travel-dummy-api.netlify.app/${route.params.slug}.json`)
+    const response = await fetch(`https://travel-dummy-api.netlify.app/${props.slug}.json`)
     destination.value = await response.json()
 }
 
