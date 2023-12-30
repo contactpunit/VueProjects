@@ -12,6 +12,12 @@ const routes = [
         component: ()=> import('../views/ShowDestination.vue'),
         props: true
     },
+    {
+        path: '/destination/:id/:slug/:experienceSlug',
+        name: 'experienceShow',
+        component: ()=> import('../views/ExperienceShow.vue'),
+        props: true
+    },
 ] as RouteRecordRaw[]
 
 const router = createRouter({

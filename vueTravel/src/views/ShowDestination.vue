@@ -9,10 +9,20 @@
     <section class="experiences" v-if="destination">
         <h2>Top experiences in {{ destination.name }}</h2>
         <div class="cards">
-            <ExperienceCard 
+            <router-link
               v-for="experience in destination.experiences"
               :key="experience.slug"
-              :experience="experience"></ExperienceCard>
+              :to="{
+                name: 'experienceShow',
+                params: {
+                    experienceSlug: experience.slug
+                }
+              }"
+              >
+                <ExperienceCard
+                  :experience="experience">
+                </ExperienceCard>
+            </router-link>
         </div>
     </section>
 </template>
