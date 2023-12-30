@@ -1,5 +1,6 @@
 <template>
-    <section v-if="destination" class="destination">
+    <div>
+        <section v-if="destination" class="destination">
         <h1>{{ destination.name }}</h1>
         <GoBack />
         <div class="destination-details">
@@ -29,6 +30,7 @@
         </div>
         <RouterView />
     </section>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -53,6 +55,15 @@ async function doApiCall() {
     const response = await fetch(`https://travel-dummy-api.netlify.app/${props.slug}.json`)
     destination.value = await response.json()
 }
-
-
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
