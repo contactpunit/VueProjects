@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import type { RouteRecordRaw } from 'vue-router'
+import sourceData from '../data.json'
 
 
 const routes = [
@@ -11,6 +12,17 @@ const routes = [
         name: 'destination',
         component: ()=> import('../views/ShowDestination.vue'),
         props: true,
+        beforeEnter(to, from) {
+            const reqRoute = sourceData.destinations.find(destination => destination.id === +to.params.id)
+            if(!reqRoute) {
+                return {
+                    name: 'NotFound',
+                    params: {pathMatch: to.path.split('/').slice(1)},
+                    query: to.query,
+                    hash: to.hash
+                }
+            }
+        },
         children: [
             {
                 path: ':experienceSlug',
