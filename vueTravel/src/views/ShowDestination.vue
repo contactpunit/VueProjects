@@ -15,15 +15,18 @@
               :to="{
                 name: 'experienceShow',
                 params: {
-                    experienceSlug: experience.slug
+                    experienceSlug: experience.slug,
+                    id,
+                    slug
                 }
               }"
-              >
-                <ExperienceCard
-                  :experience="experience">
-                </ExperienceCard>
+            >
+            <ExperienceCard
+                :experience="experience">
+            </ExperienceCard>
             </router-link>
         </div>
+        <RouterView />
     </section>
 </template>
 

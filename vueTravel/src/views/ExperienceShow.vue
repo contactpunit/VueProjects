@@ -1,7 +1,9 @@
 <template>
-    <h1>{{ props.experienceSlug }}</h1>
-    <img :src="`/images/${reqExperience?.image}`" :alt="props.experienceSlug">
-    <p>{{ reqExperience?.description }}</p>
+    <div>
+        <h1>{{ props.experienceSlug }}</h1>
+        <img :src="`/images/${reqExperience?.image}`" :alt="props.experienceSlug">
+        <p>{{ reqExperience?.description }}</p>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -9,9 +11,8 @@ import { defineProps, computed } from 'vue';
 import sourceData from '../data.json'
 
 const props = defineProps({
-    experienceSlug: {type:String, required: true},
-    id: {type: String, required: true},
-    slug: {type: String, required: true}
+    experienceSlug: {type: String, required: true},
+    id: {type: String, required: true}
 })
 
 interface Experience {

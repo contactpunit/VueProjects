@@ -9,7 +9,9 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
+
 const props = defineProps({
     experience: {type: Object, required: true}
 })
+
 </script>

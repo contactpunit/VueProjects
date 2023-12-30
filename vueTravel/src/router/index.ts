@@ -10,13 +10,15 @@ const routes = [
         path: '/destination/:id/:slug',
         name: 'destination',
         component: ()=> import('../views/ShowDestination.vue'),
-        props: true
-    },
-    {
-        path: '/destination/:id/:slug/:experienceSlug',
-        name: 'experienceShow',
-        component: ()=> import('../views/ExperienceShow.vue'),
-        props: true
+        props: true,
+        children: [
+            {
+                path: ':experienceSlug',
+                name: 'experienceShow',
+                component: ()=> import('../views/ExperienceShow.vue'),
+                props: true
+            }
+        ]
     },
 ] as RouteRecordRaw[]
 
