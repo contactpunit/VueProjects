@@ -1,6 +1,7 @@
 <template>
     <section v-if="destination" class="destination">
         <h1>{{ destination.name }}</h1>
+        <GoBack />
         <div class="destination-details">
             <img :src="`/images/${destination.image}`" :alt="destination.name">
             <p>{{ destination.description }}</p>
@@ -34,6 +35,7 @@
 import { ref, defineProps, onMounted } from 'vue'
 // import { useRoute } from 'vue-router';
 import ExperienceCard from '../components/ExperienceCard.vue';
+import GoBack from '../components/GoBack.vue';
 
 // const route = useRoute()
 const destination = ref()

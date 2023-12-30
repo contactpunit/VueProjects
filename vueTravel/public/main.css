@@ -9,6 +9,9 @@ body {
   margin-top: 150px;
   background: #eee;
 }
+h1 {
+  margin-top: 80px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
