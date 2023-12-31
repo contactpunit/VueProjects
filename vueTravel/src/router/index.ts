@@ -7,12 +7,21 @@ import sourceData from '../data.json'
 const routes = [
     {path: '/', name: 'home', component: HomePage},
     {path: '/about',name: 'about', component: ()=> import('../views/AboutPage.vue')},
+    { path: '/login', name: 'login', component: () => import('../views/LoginPage.vue')},
+    { 
+        path: '/protected',
+        name: 'protected',
+        component: ()=> import('../views/ProtectedPage.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
     {
-        path: '/destination/:id/:slug',
+        path: '/destination/:id/:slug', 
         name: 'destination',
         component: ()=> import('../views/ShowDestination.vue'),
         props: true,
-        beforeEnter(to, from) {
+        beforeEnter(to, _) {
             const reqRoute = sourceData.destinations.find(destination => destination.id === +to.params.id)
             if(!reqRoute) {
                 return {
@@ -39,8 +48,16 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
     linkActiveClass: 'router-bold',
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(_, _2, savedPosition) {
         return savedPosition || {top: 0}
+    }
+})
+
+router.beforeEach((to, _) => {
+    if(to.meta?.requiresAuth) {
+        return {
+            name: 'login'
+        }
     }
 })
 
