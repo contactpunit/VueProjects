@@ -19,7 +19,10 @@ const routes = [
     {
         path: '/invoices',
         name: 'invoices',
-        component: () => import('../views/InvoicesShow.vue')
+        component: () => import('../views/InvoicesShow.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/destination/:id/:slug', 
