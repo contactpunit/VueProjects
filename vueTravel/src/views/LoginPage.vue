@@ -17,13 +17,20 @@
 
 <script setup lang="ts">
 import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 
 const username = ref('')
 const password = ref('')
+
+const router = useRouter()
 
 const submitForm = () => {
     const user = username.value
     const pass = password.value
     console.log(user, ' ', pass)
+    router.push({
+        name: 'home'
+    })
+
 }
 </script>
