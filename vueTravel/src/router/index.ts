@@ -17,6 +17,11 @@ const routes = [
         }
     },
     {
+        path: '/invoices',
+        name: 'invoices',
+        component: () => import('../views/InvoicesShow.vue')
+    },
+    {
         path: '/destination/:id/:slug', 
         name: 'destination',
         component: ()=> import('../views/ShowDestination.vue'),
@@ -55,6 +60,7 @@ const router = createRouter({
 
 router.beforeEach((to, _) => {
     if(to.meta?.requiresAuth) {
+        if(window.name !== 'protected')
         return {
             name: 'login'
         }

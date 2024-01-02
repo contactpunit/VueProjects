@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1>Logion Page</h1>
+        <h1>Login Page</h1>
         <form action="submit" @submit.prevent="submitForm">
             <div>
                 <label for="username">username</label>
@@ -17,20 +17,20 @@
 
 <script setup lang="ts">
 import {ref} from 'vue'
-import {useRouter} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 const username = ref('')
 const password = ref('')
-
+const route = useRoute()
 const router = useRouter()
 
 const submitForm = () => {
     const user = username.value
     const pass = password.value
-    console.log(user, ' ', pass)
-    router.push({
-        name: 'home'
-    })
-
+    window.name = 'protected'
+    if(user && pass) {
+        const redirectPath = route.query.redirect || '/protected'
+        if(typeof redirectPath === 'string') router.push(redirectPath)
+    }
 }
 </script>
