@@ -8,6 +8,7 @@ const routes = [
     {path: '/', name: 'home', component: HomePage, alias: '/home'},
     {path: '/about',name: 'about', component: ()=> import('../views/AboutPage.vue')},
     { path: '/login', name: 'login', component: () => import('../views/LoginPage.vue')},
+    { path: '/example/:id(\\d+)', name: 'example', component: () => import('../views/LoginPage.vue')},
     { 
         path: '/protected',
         name: 'protected',
