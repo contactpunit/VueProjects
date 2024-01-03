@@ -11,7 +11,11 @@ const routes = [
     { 
         path: '/protected',
         name: 'protected',
-        component: ()=> import('../views/ProtectedPage.vue'),
+        // component: ()=> import('../views/ProtectedPage.vue'),
+        components: {
+            default: () => import('../views/ProtectedPage.vue'),
+            SideBar: () => import('../components/SideBar.vue')
+        },
         meta: {
             requiresAuth: true
         }
@@ -19,7 +23,11 @@ const routes = [
     {
         path: '/invoices',
         name: 'invoices',
-        component: () => import('../views/InvoicesShow.vue'),
+        // component: () => import('../views/InvoicesShow.vue'),
+        components: {
+            default: () => import('../views/InvoicesShow.vue'),
+            SideBar: () => import('../components/SideBar.vue')
+        } ,
         meta: {
             requiresAuth: true
         }

@@ -1,8 +1,7 @@
 <template>
     <div>
-        <h1>Invoices</h1>
+        <h2>Invoices</h2>
     </div>
-
 </template>
 
 <script setup lang="ts"></script>
