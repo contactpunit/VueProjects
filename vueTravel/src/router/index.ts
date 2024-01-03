@@ -6,6 +6,7 @@ import sourceData from '../data.json'
 
 const routes = [
     {path: '/', name: 'home', component: HomePage},
+    {path: '/home', redirect: '/'},
     {path: '/about',name: 'about', component: ()=> import('../views/AboutPage.vue')},
     { path: '/login', name: 'login', component: () => import('../views/LoginPage.vue')},
     { 
