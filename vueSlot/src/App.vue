@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import BaseButton from './components/BaseButton.vue';
 </script>
 
 <template>
-  <div class="container">
-    
+  <div>
+    <base-button text="press me"></base-button>
   </div>
 </template>
 
-<style>
-.container {
-  display: flex;
-}
-</style>
