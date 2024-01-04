@@ -1,19 +1,19 @@
 <template>
-  <AppUserList>
-    <template #loading>
+  <AppUserList :secondRow="(user) => user.email">
+    <!-- <template #loading>
     <app-spinner></app-spinner>
-  </template>
+  </template> -->
   </AppUserList>
 </template>
 
 <script>
 import AppUserList from "@/components/AppUserList";
-import AppSpinner from "@/components/AppSpinner"
+// import AppSpinner from "@/components/AppSpinner"
 
 export default {
   components: {
     AppUserList,
-    AppSpinner
+    // AppSpinner
   }
 };
 </script>
