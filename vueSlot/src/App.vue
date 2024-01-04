@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import BaseButton from './components/BaseButton.vue';
+import AppLayout from './components/AppLayout.vue';
 </script>
 
 <template>
   <div>
-    <base-button>Press Me</base-button>
-    <base-button>Click Me</base-button>
-    <base-button>Submit Me</base-button>
+    <app-layout>
+      <template #header>This is header information</template>
+      <base-button>Press Me</base-button>
+      <template #footer></template>
+    </app-layout>
+
   </div>
 </template>
 
