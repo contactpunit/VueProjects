@@ -1,6 +1,7 @@
 
 <template>
   <section>
+    <slot name="users">Users</slot>
     <ul class="userlist" v-if="data">
       <li v-for="item in data.results" :key="item.email">
         <div>
