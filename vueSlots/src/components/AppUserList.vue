@@ -13,8 +13,7 @@
           />
           <div>
             <div>{{ item.name.first }}</div>
-            <!-- <slot></slot> -->
-            {{ secondRow(item) }}
+            <slot name="secondRow" :item="item"></slot>
           </div>
         </div>
       </li>
@@ -43,11 +42,6 @@ export default {
       error: undefined,
       states
     };
-  },
-  props: {
-    secondRow: {
-      type: Function
-    }
   },
   mounted() {
     this.load();
