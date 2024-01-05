@@ -2,24 +2,26 @@
 <template>
   <section>
     <slot name="users">Users</slot>
-    <ul class="userlist" v-if="data">
-      <li v-for="item in data.results" :key="item.email">
-        <slot name="listItem" :user="item">
-          <div>
-            <img
-              width="48"
-              height="48"
-              :src="item.picture.large"
-              :alt="item.name.first + ' ' + item.name.last"
-            />
+    <slot name="userList" :count="data.results.length" :list="data.results" v-if="data">
+      <ul class="userlist">
+        <li v-for="item in data.results" :key="item.email">
+          <slot name="listItem" :user="item">
             <div>
-              <div>{{ item.name.first }}</div>
-              <slot name="secondRow" :item="item"></slot>
+              <img
+                width="48"
+                height="48"
+                :src="item.picture.large"
+                :alt="item.name.first + ' ' + item.name.last"
+              />
+              <div>
+                <div>{{ item.name.first }}</div>
+                <slot name="secondRow" :item="item"></slot>
+              </div>
             </div>
-          </div>
-        </slot>
-      </li>
-    </ul>
+          </slot>
+        </li>
+      </ul>
+    </slot>
     <slot name="loading" v-if="state === 'loading'">
       loading ...
     </slot>

@@ -1,8 +1,9 @@
 <template>
   <AppUserList>
-    <template #listItem="{user}">
+    <template #userList="{count, list}">
       <pre>
-        {{ user.location.country }}
+        {{ count }}
+        {{ list }}
       </pre>
     </template>
   </AppUserList>
