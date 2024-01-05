@@ -9,8 +9,12 @@
               :alt="item.name.first + ' ' + item.name.last"
             />
             <div class="card-body">
-              <div>{{ item.name.first }}</div>
+              <!-- <div>{{ item.name.first }}</div> -->
               <slot name="secondrow" :item="item"></slot>
+              <slot name="firstname" :text="item.name.first"></slot>
+              <slot name="lastname" :text="item.name.last"></slot>
+              <slot name="fullname" :text="`${item.name.first} ${item.name.last}`"></slot>
+              <slot name="titlename" :text="`${item.name.title} ${item.name.first} ${item.name.last}`"></slot>
             </div>
           </div>
         </slot>
