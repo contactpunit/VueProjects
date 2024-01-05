@@ -1,8 +1,8 @@
 <template>
   <AppUserList>
-    <template #secondRow="slotProps">
+    <template #listItem="{user}">
       <pre>
-        {{ `${slotProps.item.name.title} ${slotProps.item.name.first} ${slotProps.item.name.last}` }}
+        {{ user.location.country }}
       </pre>
     </template>
   </AppUserList>
