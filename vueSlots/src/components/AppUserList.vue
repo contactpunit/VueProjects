@@ -2,7 +2,7 @@
 <template>
   <section>
     <slot name="users">Users</slot>
-    <slot name="userList" :count="data.results.length" :list="data.results" v-if="data">
+    <slot name="userlist" :count="data.results.length" :list="data.results" v-if="data">
       <ul class="userlist">
         <li v-for="item in data.results" :key="item.email">
           <slot name="listItem" :user="item">
@@ -15,7 +15,7 @@
               />
               <div>
                 <div>{{ item.name.first }}</div>
-                <slot name="secondRow" :item="item"></slot>
+                <slot name="secondRow" :item="item" :remove="remove"></slot>
               </div>
             </div>
           </slot>
@@ -67,6 +67,11 @@ export default {
         this.error = error;
         return error;
       }
+    },
+    remove(item) {
+      this.data.results = this.data.results.filter(entry => {
+        return entry.email !== item.email
+      })
     }
   }
 };
