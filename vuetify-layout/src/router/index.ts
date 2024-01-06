@@ -1,22 +1,30 @@
-/**
- * router/index.ts
- *
- * Automatic routes for `./src/pages/*.vue`
- */
-
-// Composables
-// import { createRouter, createWebHistory } from 'vue-router/auto'
-
-// const router = createRouter({
-//   history: createWebHistory(process.env.BASE_URL),
-// })
-
+// routes
 import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
   routes: [
-    {path: '/home', name: 'home', component: () =>import('@/components/HelloWorld.vue')},
-    {path: '/', redirect: '/home'}
+    {
+      path: '/', 
+      component: () =>import('@/pages/ApplicationLayout.vue'),
+      children: [
+        {
+          path: "",
+          name: "Home",
+          component: () =>
+            import(/* webpackChunkName: "home" */ "@/components/HelloWorld.vue"),
+        },
+        {
+          path: '/posts',
+          name: 'Posts',
+          component: ()=> import('@/components/UserPosts.vue')
+        },
+        {
+          path: '/comments',
+          name: 'Comments',
+          component: () => import('@/components/UserComments.vue')
+        }
+      ]
+    }
   ],
   history: createWebHistory()
 })
