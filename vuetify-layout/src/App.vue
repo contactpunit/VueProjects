@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-main>
-      <router-view></router-view>
+      <div class="pa-5">
+        <router-view></router-view>
+      </div>
     </v-main>
   </v-app>
 </template>

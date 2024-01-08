@@ -61,7 +61,6 @@
               size="large"
               start
             />
-
             Community
           </v-btn>
         </v-col>
