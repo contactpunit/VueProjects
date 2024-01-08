@@ -1,38 +1,42 @@
 <template>
     <div>
         <h1>Posts</h1>
-        <v-table
-          :height="500"
-          :fixed-header="true"
-          density="comfortable"
-          :hover="true"
-        >
-            <thead>
-                <tr>
-                    <th class="text-left">
-                    Name
-                    </th>
-                    <th class="text-left">
-                    Author
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="item in posts"
-                    :key="item.title"
-                >
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.author }}</td>
-                </tr>
-            </tbody>
-        </v-table>
+        <v-text-field
+        v-model="search"
+        append-icon="mdi-search"
+        label="Search"
+        single-line
+        hide-details
+        ></v-text-field>
+        <v-data-table
+            :headers="[
+                {
+                    title: 'All Posts',
+                    align: 'start',
+                    sortable: false,
+                    key: 'title'
+                },
+                {
+                    title: 'Author',
+                    align: 'end',
+                    key: 'author'
+                }
+            ]"
+            :items="posts"
+            show-select
+            item-value="title"
+            v-model="selected"
+            :search="search"
+        ></v-data-table>
     </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import { VDataTable } from 'vuetify/lib/components/index.mjs';
 
+const selected = ref([])
+const search = ref('')
 const posts = reactive([
     {
         title: 'Post1',
@@ -62,5 +66,5 @@ const posts = reactive([
         title: 'Post7',
         author: 'Parveen'
     },
-    ])
+])
 </script>
