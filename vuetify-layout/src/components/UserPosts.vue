@@ -21,6 +21,7 @@
         hide-details
         ></v-text-field>
         <v-data-table
+            v-click-outside="unselectAll"
             :headers="[
                 {
                     title: 'All Posts',
@@ -88,6 +89,11 @@ const selected = ref([])
 const search = ref('')
 const postForm = ref()
 const updatedPost = ref(false)
+
+const unselectAll = () => {
+    selected.value = []
+}
+
 const posts = reactive([
     {
         title: 'Post1',
