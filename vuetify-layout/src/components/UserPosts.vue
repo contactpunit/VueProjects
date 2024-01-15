@@ -1,5 +1,17 @@
 <template>
     <div>
+        <!-- <v-alert
+          variant="tonal"
+          type="success"
+          title="Post Updated"
+          closable
+          v-model="updatedPost"></v-alert> -->
+          <v-snackbar v-model="updatedPost" :timeout="4000">
+            <div class="d-flex align-center">
+                <v-icon icon="mdi-checkbox-marked-circle" class="text-green pr-3"></v-icon>
+                Post Saved
+            </div>
+          </v-snackbar>
         <h1>Posts</h1>
         <v-text-field
         v-model="search"
@@ -45,7 +57,7 @@
 
                     <v-btn
                     text="Cancel"
-                    @click="isActive.value = false"
+                    @click="isActive.value = false" 
                     ></v-btn>
 
                     <v-btn
@@ -54,6 +66,7 @@
                     text="Save Post"
                     @click="() => {
                         postForm.submit();
+                        updatedPost = true
                         isActive.value = false;
                     }"
                     ></v-btn>
@@ -74,6 +87,7 @@ import PostForm from './PostForm.vue'
 const selected = ref([])
 const search = ref('')
 const postForm = ref()
+const updatedPost = ref(false)
 const posts = reactive([
     {
         title: 'Post1',
