@@ -14,24 +14,24 @@
       </template>
       <template #append>
       <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-avatar
-        size="42"
-        rounded="0"
-        color="blue"
-        v-bind="props"
-        >
-      <span>PJ</span></v-avatar>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in ['Profile', 'Settings', 'Logout']"
-          :key="index"
-          :value="index"
-        >
-          <v-list-item-title>{{ item }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+        <template v-slot:activator="{ props }">
+          <v-avatar
+          size="42"
+          rounded="0"
+          color="blue"
+          v-bind="props"
+          >
+        <span>PJ</span></v-avatar>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in ['Profile', 'Settings', 'Logout']"
+            :key="index"
+            :value="index"
+          >
+            <v-list-item-title>{{ item }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
     </v-menu>
       </template>
     </v-app-bar>

@@ -35,17 +35,27 @@
             </template>
 
             <template v-slot:default="{ isActive }">
-                <v-card title="Dialog">
+                <v-card title="Edit Post">
                 <v-card-text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <PostForm :post="item" ref="postForm"></PostForm>
                 </v-card-text>
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
 
                     <v-btn
-                    text="Close Dialog"
+                    text="Cancel"
                     @click="isActive.value = false"
+                    ></v-btn>
+
+                    <v-btn
+                    color="blue"
+                    variant="flat"
+                    text="Save Post"
+                    @click="() => {
+                        postForm.submit();
+                        isActive.value = false;
+                    }"
                     ></v-btn>
                 </v-card-actions>
                 </v-card>
@@ -59,9 +69,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { VDataTable } from 'vuetify/lib/components/index.mjs';
+import PostForm from './PostForm.vue'
 
 const selected = ref([])
 const search = ref('')
+const postForm = ref()
 const posts = reactive([
     {
         title: 'Post1',
