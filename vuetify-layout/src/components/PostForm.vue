@@ -12,7 +12,11 @@
             </v-col>
         </v-row>
 
-        <v-text-field v-model="form.title" label="Title"></v-text-field>
+        <v-text-field 
+          v-model="form.title"
+          label="Title"
+          :rules="[isRequired]"
+        ></v-text-field>
 
         <v-combobox
           v-model="form.tags"
@@ -20,6 +24,7 @@
           label="Tags"
           multiple
           chips
+          :rules="[arrayIsEmpty]"
           >
         </v-combobox>
         <v-file-input
@@ -61,6 +66,21 @@ const handleSubmit = () => {
 const submitBtn = ref()
 
 const submit = () => submitBtn.value.click()
+
+const isRequired = (value: string) => {
+    if(value) return true
+    else return 'Title field is required'
+}
+
+const arrayIsEmpty = (value) => {
+    if(!value.length) return 'No tags selected'
+    else return true
+}
+// async function asyncValidation(value: string) {
+//     const res = await fetch(`http://httpbin.org/status/${value}`)
+//     if(res.status === 200) return true
+//     else return 'Unable to fetch post title'
+// }
 
 defineExpose({ submit })
 </script>
