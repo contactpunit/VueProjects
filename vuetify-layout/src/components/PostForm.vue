@@ -37,18 +37,21 @@
 
         <v-textarea
         label="Post Body"
-        v-model="form.body"></v-textarea>
+        v-model="form.body"
+        :rules="[isRequired]"></v-textarea>
 
         <button type="submit" ref="submitBtn" class="d-none">Submit</button>
     </v-form>
 </template>
 
 <script setup lang="ts">
-import {reactive, defineProps, ref} from 'vue'
+import {reactive, defineProps, ref, defineEmits} from 'vue'
 
 const props = defineProps<({
     post: Record<string, any>;
 })>()
+
+const emit = defineEmits(['submit'])
 
 const form = reactive({
     title: '',
@@ -56,11 +59,17 @@ const form = reactive({
     tags: [],
     body: '',
     image: [],
-    ...props.post
+    ...props.post   
 })
 
+const valid = ref(true)
+
 const handleSubmit = () => {
-    console.log(form)
+    if(!form.title || !form.body ||
+    !form.tags.length) valid.value = false
+    else valid.value = true
+    if (!valid.value) return
+    emit('submit')
 }
 
 const submitBtn = ref()
@@ -72,7 +81,7 @@ const isRequired = (value: string) => {
     else return 'Title field is required'
 }
 
-const arrayIsEmpty = (value) => {
+const arrayIsEmpty = (value: string[]) => {
     if(!value.length) return 'No tags selected'
     else return true
 }
